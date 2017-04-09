@@ -1,6 +1,7 @@
-#
-adfjkasl
-dfalj
+#include<iostream>
+using namespace std;
 
-af
-
+int main() {
+	cout << "Wish everything go smoothly!"
+		return 0;
+}
