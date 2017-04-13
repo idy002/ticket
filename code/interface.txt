@@ -1,0 +1,171 @@
+The Interface of Ticket Project
+
+v1.0
+
+The structrue of this project:
+	Lib:
+		shared_ptr
+		vector
+		map
+		set
+		utility
+	Ticket
+	Account
+	Train
+	Log 
+	UI
+
+** NOTICE: We should use shared_ptr in the whole project **
+
+file - lib/shared_ptr.hpp
+	shared_ptr - implement the simplified shared_ptr in <memory>
+		member function:
+			shared_ptr()
+			shared_ptr( T * ptr )
+			shared_ptr( const shared_ptr &ptr ) 
+			operator=
+			operator*
+			operator->
+			get
+			use_count
+file - lib/vector.hpp
+	vector - implement the simplified std::vector
+		member function:
+			vector()
+			vector( const vector &vec ) 
+			operator[]
+			operator=
+			size
+			resize
+			empty
+			clear
+			push_back
+			pop_back
+			write
+			read 
+file - lib/map.hpp
+	map - implement the simplified std::map
+		member function:
+			map()
+			map( const map & other )
+			operator=
+			operator[]
+			begin
+			end
+			size
+			empty
+			insert
+			erase
+			find
+			count
+			write
+			read 
+file - lib/set.hpp
+	set - implement the simplified std::set
+		member function:
+			set()
+			set( const set & other )
+			operator=
+			begin
+			end
+			size
+			empty
+			insert
+			erase
+			find
+			count
+			write
+			read 
+file - lib/utility.hpp
+	utility - implement some useful functions
+		min, max
+		swap
+		pair
+		Time
+
+file - ticket.hpp
+	Ticket - implement the Ticket struct, which store the ticket information.
+		member:
+			string from, to
+			string type
+			int dist
+			int time
+			double price
+		member function:
+			operator <
+			operator ==
+			void write( ostream & out )
+			void read( istream & in ) 
+
+file - account.hpp, account.cpp
+	set<User> users
+	set<Manager> managers
+
+	void addUser( string id, string password )
+	void addManager( string id, string password )
+
+	Account - implement the account class, which store the account information, including id, password, tickets
+		member:
+			string id
+			string name
+			string password
+		member function:
+			Account( id, password )
+			string getPassword() 
+			void setPassword()
+			string getName()
+			void setName()
+			bool operator<
+
+	User - inherited from Account, the normal user class
+		member:
+			vector<pair<Ticket,int>> tickets
+			vector<pair<Ticket,int>> bought, refunded
+		member function:
+			addTicket( ticket, int cnt )
+			delTicket( ticket, int cnt )
+			void write( ostream & out )
+			void read( istream & in ) 
+	
+	Manager - inherited from Account, the manager class.
+		no other information
+
+file - train.hpp train.cpp
+	map<pair<string,string>,vector<string>> net;
+	map<string,Train> trans;
+	
+	Seat - implement the seat struct, which store the remaining seat information of one kind of seat class.
+		member:
+			string name
+			vector<double> price
+			vector<int> remain
+			void write( ostream & out )
+			void read( istream & in ) 
+	Train - implement the train class, which store the train data, including train id, path, distance etc.
+		member:
+			vector<string> stations
+			vector<int> dist
+			vector<Time> arrive, leave
+			vector<pair<Time,vector<Seat>> seats
+			void write( ostream & out )
+			void read( istream & in ) 
+		member function:
+			operator <
+			pair<Ticket,int> queryTicket( string from, string to, Time date )
+			pair<Ticket,int> buyTicket( string from, string to, int cnt )
+			void refundTicket( const Ticket & ticket, int cnt )
+			void write( ostream & out )
+			void read( istream & in ) 
+
+file - log.hpp log.cpp
+	vector<Log> readLog( istream & in )
+	void writeLog( ostream & out )
+
+	Log - implement the log struct
+		member:
+			Time time;
+			string message;
+		member function:
+			void write( ostream & out )
+			void read( istream & in ) 
+
