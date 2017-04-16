@@ -7,15 +7,14 @@
 template<typename T>
 class shared_ptr {
 	size_t * count;
-	T * ptr;
+	T * pointer;
 	public:
 	shared_ptr( T * ptr = 0 ):ptr(ptr),count(new size_t(0)) {
 		if( ptr )
-			count = 1;
+			*count = 1;
 		else
-			count = 0;
+			*count = 0;
 	}
-
 };
 
 #endif
