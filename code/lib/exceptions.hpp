@@ -41,8 +41,7 @@ namespace tic {
 		/* __________________________ */
 	};
 
-	class copy_construct_from_self : public exception {
-
+	class dereference_empty_pointer : public exception {
 	};
 }
 

@@ -4,7 +4,7 @@
 #include <utility>
 
 namespace tic {
-	tmplate<class T1, class T2>
+	template<class T1, class T2>
 		class pair {
 			public:
 				T1 first;
