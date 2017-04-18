@@ -1,7 +1,7 @@
 #ifndef TICKET_UTILITY_HPP
 #define TICKET_UTILITY_HPP
 
-#include <utility>
+//#include <utility>
 
 namespace tic {
 	template<class T1, class T2>
@@ -34,7 +34,25 @@ namespace tic {
 			a = b;
 			b = c;
 		}
+	using std::istream;
+	using std::ostream;
 
+	void read( istream &in, int  & val ) {
+		in.read( (char*) & val, sizeof(val) );
+	}
+
+	void write( ostream &out, int & val ) {
+		out.write( (char*) & val, sizeof(val) );
+	}
+
+	template<class T>
+		void write( ostream &out, T & val ) {
+			val.write( out );
+		}
+	template<class T>
+		void read( istream &in, T & val ) {
+			val.read( in );
+		}
 }
 
 #endif

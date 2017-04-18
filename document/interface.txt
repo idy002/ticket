@@ -27,6 +27,7 @@ file - lib/shared_ptr.hpp
 			operator*
 			operator->
 			get
+			reset
 			use_count
 file - lib/vector.hpp
 	vector - implement the simplified std::vector
