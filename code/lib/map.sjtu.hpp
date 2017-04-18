@@ -1,17 +1,16 @@
-/*
- * map.h - implement the map template
+/**
+ * implement a container like std::map
  */
-#ifndef TICKET_MAP_H
-#define TICKET_MAP_H
+#ifndef SJTU_MAP_HPP
+#define SJTU_MAP_HPP
 
 // only for std::less<T>
 #include <functional>
 #include <cstddef>
-#include <alloc>
 #include "utility.hpp"
 #include "exceptions.hpp"
 
-namespace tic {
+namespace sjtu {
 
 template<
 	class Key,
@@ -707,6 +706,5 @@ public:
 };
 
 }
-
 
 #endif
