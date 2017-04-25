@@ -9,10 +9,11 @@ The structrue of this project:
 		map
 		set
 		utility
-	Ticket
-	Account
-	Train
-	Log 
+	Railway
+		Ticket
+		Account
+		Train
+		Log 
 	UI
 
 ** NOTICE: We should use shared_ptr in the whole project **
@@ -90,7 +91,7 @@ file - ticket.hpp
 			string from, to
 			string type
 			int dist
-			int time
+			int during
 			double price
 		member function:
 			operator <
@@ -111,7 +112,7 @@ file - account.hpp, account.cpp
 			string name
 			string password
 		member function:
-			Account( id, password )
+			Account( id, name, password )
 			string getPassword() 
 			void setPassword()
 			string getName()
@@ -120,8 +121,8 @@ file - account.hpp, account.cpp
 
 	User - inherited from Account, the normal user class
 		member:
-			vector<pair<Ticket,int>> tickets
-			vector<pair<Ticket,int>> bought, refunded
+			vector<pair<Ticket,int>> bought
+			vector<pair<Ticket,int>> refunded
 		member function:
 			addTicket( ticket, int cnt )
 			delTicket( ticket, int cnt )
@@ -137,9 +138,9 @@ file - train.hpp train.cpp
 	
 	Seat - implement the seat struct, which store the remaining seat information of one kind of seat class.
 		member:
-			string name
-			vector<double> price
-			vector<int> remain
+			string type
+			vector<double> prices;
+			vector<int> remains;
 			void write( ostream & out )
 			void read( istream & in ) 
 	Train - implement the train class, which store the train data, including train id, path, distance etc.
@@ -147,13 +148,11 @@ file - train.hpp train.cpp
 			vector<string> stations
 			vector<int> dist
 			vector<Time> arrive, leave
-			vector<pair<Time,vector<Seat>> seats
-			void write( ostream & out )
-			void read( istream & in ) 
+			map<Time,vector<Seat>> seats
 		member function:
 			operator <
-			pair<Ticket,int> queryTicket( string from, string to, Time date )
-			pair<Ticket,int> buyTicket( string from, string to, int cnt )
+			vector<pair<Ticket,int>> queryTicket( Time time, string from, string to, Time time )
+			pair<Ticket,int> buyTicket( Time time, string from, string to, string type, int cnt )
 			void refundTicket( const Ticket & ticket, int cnt )
 			void write( ostream & out )
 			void read( istream & in ) 
