@@ -4,6 +4,10 @@
 #ifndef TICKET_TICKET_HPP
 #define TICKET_TICKET_HPP
 
+#include <string>
+
+using std::string;
+
 struct Ticket {
 	string trainid;
 	string from, to;

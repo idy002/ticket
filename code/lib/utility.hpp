@@ -3,6 +3,9 @@
 
 //#include <utility>
 
+#include <istream>
+#include <ostream>
+
 namespace tic {
 	//	utilities for general use
 	template<class T1, class T2>

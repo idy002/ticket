@@ -4,6 +4,18 @@
 #ifndef TICKET_TRAIN_HPP
 #define TICKET_TRAIN_HPP
 
+#include <string>
+
+#include "lib/map.hpp"
+#include "lib/vector.hpp"
+#include "lib/set.hpp"
+#include "lib/utility.hpp"
+
+using std::string;
+using tic::map;
+using tic::set;
+using tic::vector;
+
 struct Seat {
 	string type;
 	vector<double> prices;

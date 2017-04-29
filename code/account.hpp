@@ -3,7 +3,18 @@
  */
 #ifndef TICKET_ACCOUNT_HPP
 #define TICKET_ACCOUNT_HPP
+
 #include <string>
+
+#include "lib/map.hpp"
+#include "lib/vector.hpp"
+#include "lib/set.hpp"
+#include "lib/utility.hpp"
+
+using std::string;
+using tic::map;
+using tic::set;
+using tic::vector;
 
 class Account {
 	string id;

@@ -4,6 +4,8 @@
 #ifndef TICKET_RAILWAY_HPP
 #define TICKET_RAILWAY_HPP
 
+#include <string>
+
 #include "lib/set.hpp"
 #include "lib/map.hpp"
 #include "lib/vector.hpp"
@@ -11,6 +13,13 @@
 #include "account.hpp"
 #include "ticket.hpp"
 #include "train.hpp"
+
+namespace tic {
+
+using std::string;
+using tic::vector;
+using tic::set;
+using tic::map;
 
 class Railway {
 	private:
@@ -114,6 +123,8 @@ class Railway {
 		void writeToFile( const char * filename ) {
 		}
 };
+
+}
 
 #endif
 

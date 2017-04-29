@@ -7,7 +7,6 @@
 #include <vector>
 
 namespace tic {
-	typedef std::vector vector;
 }
 
 #endif

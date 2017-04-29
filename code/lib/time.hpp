@@ -39,14 +39,14 @@ struct Time {
 		return second < rhs.second;
 	}
 	void write( ostream & out ) {
-		out.write( &hour, sizeof(hour) );
-		out.write( &minite, sizeof(minite) );
-		out.write( &second, sizeof(second) );
+		tic::write( out, hour );
+		tic::write( out, minite );
+		tic::write( out, second );
 	}
 	void read( istream & in ) {
-		out.read( &hour, sizeof(hour) );
-		out.read( &minite, sizeof(minite) );
-		out.read( &second, sizeof(second) );
+		tic::read( in, hour );
+		tic::read( in, minite );
+		tic::read( in, second );
 	}
 };
 
@@ -66,14 +66,14 @@ struct Date {
 		return day < rhs.day;
 	}
 	void write( ostream & out ) {
-		out.write( year, sizeof(year) );
-		out.write( month, sizeof(month) );
-		out.write( day, sizeof(day) );
+		tic::write( out, year );
+		tic::write( out, month );
+		tic::write( out, day );
 	}
 	void read( istream & in ) {
-		in.read( year, sizeof(year) );
-		in.read( month, sizeof(month) );
-		in.read( day, sizeof(day) );
+		tic::read( in, year );
+		tic::read( in, month );
+		tic::read( in, day );
 	}
 };
 
