@@ -4,6 +4,7 @@
 //#include <utility>
 
 namespace tic {
+	//	utilities for general use
 	template<class T1, class T2>
 		class pair {
 			public:
@@ -26,7 +27,11 @@ namespace tic {
 			if( a < b ) return b;
 			return a;
 		}
-
+	template<class T> 
+		T min( const T &a, const T &b ) {
+			if( a < b ) return b;
+			return a;
+		}
 	template<class T>
 		void swap( T &a, T &b ) {
 			T c;
@@ -34,6 +39,8 @@ namespace tic {
 			a = b;
 			b = c;
 		}
+
+	//	utilities for file input/output
 	using std::istream;
 	using std::ostream;
 

@@ -1,7 +1,5 @@
 The Interface of Ticket Project
 
-v1.0
-
 The structrue of this project:
 	Lib:
 		shared_ptr
@@ -9,6 +7,7 @@ The structrue of this project:
 		map
 		set
 		utility
+		time
 	Railway
 		Ticket
 		Account
@@ -145,14 +144,15 @@ file - train.hpp train.cpp
 			void read( istream & in ) 
 	Train - implement the train class, which store the train data, including train id, path, distance etc.
 		member:
+			string id
 			vector<string> stations
 			vector<int> dist
 			vector<Time> arrive, leave
-			map<Time,vector<Seat>> seats
+			map<Date,vector<Seat>> seats
 		member function:
 			operator <
-			vector<pair<Ticket,int>> queryTicket( Time time, string from, string to, Time time )
-			pair<Ticket,int> buyTicket( Time time, string from, string to, string type, int cnt )
+			vector<pair<Ticket,int>> queryTicket( Date date, string from, string to, Time time )
+			pair<Ticket,int> buyTicket( Date date, string from, string to, string type, int cnt )
 			void refundTicket( const Ticket & ticket, int cnt )
 			void write( ostream & out )
 			void read( istream & in ) 

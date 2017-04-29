@@ -45,7 +45,8 @@ namespace tic {
 	};
 
 	class refund_more_than_bought : public exception {
-	}
+	};
+
 }
 
 #endif

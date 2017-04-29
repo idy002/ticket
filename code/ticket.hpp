@@ -5,10 +5,11 @@
 #define TICKET_TICKET_HPP
 
 struct Ticket {
+	string trainid;
 	string from, to;
 	string type;
+	Time during;
 	int dist;
-	int during;
 	double price;
 
 	bool operator<( const Ticket & rhs ) const {
@@ -21,6 +22,7 @@ struct Ticket {
 		return (from == rhs.from && to == rhs.to && type == rhs.type);
 	}
 	void write( ostream & out ) {
+		write( out, trainid );
 		write( out, from );
 		write( out, to );
 		write( out, type );
@@ -29,6 +31,7 @@ struct Ticket {
 		write( out, price );
 	}
 	void read( istream & in ) {
+		read( in, trainid );
 		read( in, from );
 		read( in, to );
 		read( in, type );

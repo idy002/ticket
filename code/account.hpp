@@ -52,11 +52,20 @@ class User : public Account {
 	void addTicket( Ticket tc, int cnt ) {
 		bought[tc] += cnt;
 	}
-	void delTicket( Ticket tc, int cnt ) {
+	void refundTicket( const Ticket & ticket, int cnt ) {
 		int & tcnt = bought[tc];
-		if( tcnt < cnt ) throw refund_more_than_bought();
 		refunded[tc] += cnt;
 		tcnt -= cnt;
+	}
+	void queryBoughtTickets( vector<pair<Ticket,int>> & result ) {
+		for( map<Ticket,int>::iterator it = bought.begin();
+				it != bought.end(); ++it )
+			result.push_back( *it );
+	}
+	void queryRefundedTickets( vector<pair<Ticket,int>> & result ) {
+		for( map<Ticket,int>::iterator it = refunded.begin();
+				it != refunded.end(); ++it )
+			result.push_back( *it );
 	}
 	void write( ostream & out ) {
 		User::write( out );

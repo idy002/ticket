@@ -1,8 +1,8 @@
-/**
- * implement a container like std::map
+/*
+ * implement a container like std::set
  */
-#ifndef TICKET_MAP_HPP
-#define TICKET_MAP_HPP
+#ifndef TICKET_SET_HPP
+#define TICKET_SET_HPP
 
 #include <functional>
 #include <istream>
@@ -14,16 +14,11 @@
 namespace tic {
 	template<
 		class Key,
-		class T,
 		class Compare = std::less<Key>
-	> class map {
+	> class set {
 		public:
-			/**
-			 * the internal type of data.
-			 * it should have a default constructor, a copy constructor.
-			 * You can use sjtu::map as value_type by typedef.
-			 */
-			typedef pair<Key, T> value_type;
+			typedef Key value_type;
+
 		private:
 			struct Node {
 				value_type *pvalue;
@@ -147,9 +142,9 @@ namespace tic {
 				maintain( top->par );
 			}
 			pair<Node*,bool> insert( Node *nd, const value_type & value ) {
-				if( equal( nd->pvalue->first, value.first ) ) {
+				if( equal( *nd->pvalue, value ) ) {
 					return pair<Node*,bool>(nd,false);
-				} else if( cmp(nd->pvalue->first,value.first) ) {
+				} else if( cmp( *nd->pvalue,value) ) {
 					if( nd->rson == pend ) {
 						Node *next = nd->next;
 						Node *nnd = new Node( new value_type(value), 1, 1, nd, pend, pend, nd, next, pend );
@@ -179,8 +174,8 @@ namespace tic {
 			}
 			Node *find( Node *nd, const Key & key ) const {
 				if( nd == pend ) return nd;
-				if( equal( nd->pvalue->first, key ) ) return nd;
-				if( cmp(nd->pvalue->first,key) ) return find( nd->rson, key );
+				if( equal( *nd->pvalue, key ) ) return nd;
+				if( cmp( *nd->pvalue, key ) ) return find( nd->rson, key );
 				else return find( nd->lson, key );
 			}
 			void erase( Node *nd ) {
@@ -287,27 +282,16 @@ namespace tic {
 			}
 
 		public:
-			/**
-			 * see BidirectionalIterator at CppReference for help.
-			 *
-			 * if there is anything wrong throw invalid_iterator.
-			 *     like it = map.begin(); --it;
-			 *       or it = map.end(); ++end();
-			 */
-
 			class const_iterator;
 			class iterator {
 			private:
-				/**
-				 * TODO add data members
-				 *   just add whatever you want.
-				 */
 				Node *node;
 				Node *get() const {
 					return node;
 				}
+
 			public:
-				friend class map;
+				friend class set;
 				iterator( Node *nd ) {
 					node = nd;
 				}
@@ -412,17 +396,14 @@ namespace tic {
 					return node;
 				}
 			public:
-				friend class map;
+				friend class set;
 				const_iterator() {
-					// TODO
 					node = 0;
 				}
 				const_iterator(const const_iterator &other) {
-					// TODO
 					node = other.get();
 				}
 				const_iterator(const iterator &other) {
-					// TODO
 					node = other.get();
 				}
 				const_iterator &operator=( const iterator &other ) {
@@ -517,12 +498,12 @@ namespace tic {
 			/**
 			 * TODO two constructors
 			 */
-			map() {
+			set() {
 				pend = (Node*) ::operator new( sizeof(Node) );
 				pend->prev = pend->next = pend->lson = pend->rson = pend->pend = pend;
 				pend->height = pend->size = 0;
 			}
-			map(const map &other) {
+			set(const set &other) {
 				if( other.empty() ) {
 					pend = new Node;
 					pend->prev = pend->next = pend->lson = pend->rson = pend->pend = pend;
@@ -560,62 +541,21 @@ namespace tic {
 			/**
 			 * TODO assignment operator
 			 */
-			map & operator=(const map &other) {
+			set & operator=(const set &other) {
 				if( this == &other ) return *this;
 
 				clear();
 				delete pend;
 
-				new(this) map(other);
+				new(this) set(other);
 				return *this;
 			}
 			/**
 			 * TODO Destructors
 			 */
-			~map() {
+			~set() {
 				clear();
 				delete pend;
-			}
-			/**
-			 * TODO
-			 * access specified element with bounds checking
-			 * Returns a reference to the mapped value of the element with key equivalent to key.
-			 * If no such element exists, an exception of type `index_out_of_bound'
-			 */
-			T & at(const Key &key) {
-				Node *node = find(pend->lson,key);
-				if( node == pend ) throw index_out_of_bound();
-				return node->pvalue->second;
-			}
-			const T & at(const Key &key) const {
-				Node *node = find(pend->lson,key);
-				if( node == pend ) throw index_out_of_bound();
-				return node->pvalue->second;
-			}
-			/**
-			 * TODO
-			 * access specified element 
-			 * Returns a reference to the value that is mapped to a key equivalent to key,
-			 *   performing an insertion if such key does not already exist.
-			 */
-			T & operator[](const Key &key) {
-				Node *node = find(pend->lson,key);
-				if( node == pend ) {
-					return insert( value_type(key,T()) ).first->second;
-				} else {
-					return node->pvalue->second;
-				}
-			}
-			/**
-			 * behave like at() throw index_out_of_bound if such key does not exist.
-			 */
-			const T & operator[](const Key &key) const {
-				Node *node = find(pend->lson,key);
-				if( node == pend ) {
-					throw index_out_of_bound();
-				} else {
-					return node->pvalue->second;
-				}
 			}
 			/**
 			 * return a iterator to the beginning
@@ -722,8 +662,7 @@ namespace tic {
 					out.write( (char*) & cur->next->index, sizeof(int) );
 					out.write( (char*) & cur->height, sizeof(int) );
 					out.write( (char*) & cur->size, sizeof(int) );
-					tic::write( out, cur->pvalue->first );
-					tic::write( out, cur->pvalue->second );
+					tic::write( out, *cur->pvalue );
 				}
 			}
 			void read( std::istream &in ) {
@@ -745,8 +684,7 @@ namespace tic {
 						in.read( (char*) & pool[i]->height, sizeof(int) );
 						in.read( (char*) & pool[i]->size, sizeof(int) );
 						pool[i]->pvalue = new value_type;
-						tic::read( in, pool[i]->pvalue->first );
-						tic::read( in, pool[i]->pvalue->second );
+						tic::read( in, *pool[i]->pvalue );
 					}
 					pool[n] = pend;
 					for( int i = 0; i < n; i++ ) {
@@ -765,4 +703,6 @@ namespace tic {
 	};
 }
 
+
 #endif
+
