@@ -12,6 +12,7 @@
 #include "exceptions.hpp"
 
 namespace tic {
+
 	template<
 		class Key,
 		class T,

@@ -1,7 +1,4 @@
-#include "lib/lib.hpp"
-#include "railway.hpp"
-
-tic::Railway railway;
+#include "train.hpp"
 
 int main() {
 }

@@ -65,6 +65,12 @@ struct Date {
 		if( month != rhs.month ) return month < rhs.month;
 		return day < rhs.day;
 	}
+	bool operator==( const Date & rhs ) const {
+		return year == rhs.year && month == rhs.month && day == rhs.day;
+	}
+	bool operator!=( const Date & rhs ) const {
+		return !(*this == rhs);
+	}
 	void write( ostream & out ) {
 		tic::write( out, year );
 		tic::write( out, month );

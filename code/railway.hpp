@@ -4,11 +4,7 @@
 #ifndef TICKET_RAILWAY_HPP
 #define TICKET_RAILWAY_HPP
 
-#include <string>
-
-#include "lib/set.hpp"
-#include "lib/map.hpp"
-#include "lib/vector.hpp"
+#include "lib/lib.hpp"
 
 #include "account.hpp"
 #include "ticket.hpp"

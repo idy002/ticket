@@ -4,18 +4,11 @@
 #ifndef TICKET_TRAIN_HPP
 #define TICKET_TRAIN_HPP
 
-#include <string>
+#include "lib/lib.hpp"
 
-#include "lib/map.hpp"
-#include "lib/vector.hpp"
-#include "lib/set.hpp"
-#include "lib/utility.hpp"
+#include "ticket.hpp"
 
-using std::string;
-using tic::map;
-using tic::set;
-using tic::vector;
-
+namespace tic {
 struct Seat {
 	string type;
 	vector<double> prices;
@@ -23,20 +16,20 @@ struct Seat {
 	bool hasStop;
 
 	void write( ostream & out ) {
-		write( out, type );
-		write( out, prices );
-		write( out, remains );
-		write( out, hasStop );
+		tic::write( out, type );
+		tic::write( out, prices );
+		tic::write( out, remains );
+		tic::write( out, hasStop );
 	}
 	void read( istream & in ) {
-		read( in, type );
-		read( in, prices );
-		read( in, remains );
-		read( in, hasStop );
+		tic::read( in, type );
+		tic::read( in, prices );
+		tic::read( in, remains );
+		tic::read( in, hasStop );
 	}
 };
 class Train {
-	string id
+	string id;
 	vector<string> stations;
 	vector<int> dists;
 	vector<Time> arrive, leave;
@@ -63,6 +56,7 @@ class Train {
 				available = min( available, seat.remains[tt] );
 			if( available > 0 ) {
 				Ticket ticket;
+				ticket.date = date;
 				ticket.trainid = id;
 				ticket.from = from;
 				ticket.to = to;
@@ -79,9 +73,9 @@ class Train {
 		int tfrom, tto;
 		for( int t = 0; t < (int)stations.size(); t++ ) {
 			if( ticket.from == stations[t] ) tfrom = t;
-			if( ticket.to == station[t] ) tto = t;
+			if( ticket.to == stations[t] ) tto = t;
 		}
-		if( tfrom >= tto ) return 0;
+		if( tfrom >= tto ) return;
 		vector<Seat> &vseat = seats.at( ticket.date );
 		for( int t = 0; t < (int)vseat.size(); t++ ) {
 			if( vseat[t].type == ticket.type ) {
@@ -91,7 +85,7 @@ class Train {
 					available = min( available, seat.remains[tt] );
 				int ret = min( available, cnt );
 				for( int tt = tfrom + 1; tt <= tto; tt++ )
-					seat.remain[tt] -= ret;
+					seat.remains[tt] -= ret;
 				return;
 			}
 		}
@@ -100,7 +94,7 @@ class Train {
 		int tfrom, tto;
 		for( int t = 0; t < (int)stations.size(); t++ ) {
 			if( ticket.from == stations[t] ) tfrom = t;
-			if( ticket.to == station[t] ) tto = t;
+			if( ticket.to == stations[t] ) tto = t;
 		}
 		if( tfrom >= tto ) return;
 		vector<Seat> &vseat = seats.at( ticket.date );
@@ -108,28 +102,30 @@ class Train {
 			if( vseat[t].type == ticket.type ) {
 				Seat &seat = vseat[t];
 				for( int tt = tfrom + 1; tt <= tto; tt++ )
-					seat.remain[tt] += cnt;
+					seat.remains[tt] += cnt;
 				return;
 			}
 		}
 
 	}
 	void write( ostream & out ) {
-		write( out, id );
-		write( out, stations );
-		write( out, dists );
-		write( out, arrive );
-		write( out, leave );
-		write( out, seats );
+		tic::write( out, id );
+		tic::write( out, stations );
+		tic::write( out, dists );
+		tic::write( out, arrive );
+		tic::write( out, leave );
+		tic::write( out, seats );
 	}
 	void read( istream & in ) {
-		read( in, id );
-		read( in, stations );
-		read( in, dists );
-		read( in, arrive );
-		read( in, leave );
-		read( in, seats );
+		tic::read( in, id );
+		tic::read( in, stations );
+		tic::read( in, dists );
+		tic::read( in, arrive );
+		tic::read( in, leave );
+		tic::read( in, seats );
 	}
 };
+
+}
 
 #endif

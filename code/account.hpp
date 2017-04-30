@@ -4,17 +4,12 @@
 #ifndef TICKET_ACCOUNT_HPP
 #define TICKET_ACCOUNT_HPP
 
-#include <string>
+#include "lib/lib.hpp"
+#include "ticket.hpp"
 
-#include "lib/map.hpp"
-#include "lib/vector.hpp"
-#include "lib/set.hpp"
-#include "lib/utility.hpp"
-
-using std::string;
-using tic::map;
-using tic::set;
-using tic::vector;
+using tic::write;
+using tic::read;
+namespace tic {
 
 class Account {
 	string id;
@@ -39,18 +34,15 @@ class Account {
 	void setName( string name ) {
 		this->name = name;
 	}
-	bool operator<( const Pair &r, const Pair &s ) {
-		return r.id < s.id;
-	}
 	void write( ostream & out ) {
-		write( out, id );
-		write( out, name );
-		write( out, password );
+		tic::write( out, id );
+		tic::write( out, name );
+		tic::write( out, password );
 	}
 	void read( istream & in ) {
-		read( in, id );
-		read( in, name );
-		read( in, password );
+		tic::read( in, id );
+		tic::read( in, name );
+		tic::read( in, password );
 	}
 };
 class User : public Account {
@@ -64,8 +56,8 @@ class User : public Account {
 		bought[tc] += cnt;
 	}
 	void refundTicket( const Ticket & ticket, int cnt ) {
-		int & tcnt = bought[tc];
-		refunded[tc] += cnt;
+		int & tcnt = bought[ticket];
+		refunded[ticket] += cnt;
 		tcnt -= cnt;
 	}
 	void queryBoughtTickets( vector<pair<Ticket,int>> & result ) {
@@ -79,14 +71,14 @@ class User : public Account {
 			result.push_back( *it );
 	}
 	void write( ostream & out ) {
-		User::write( out );
-		write( out, bought );
-		write( out, refunded );
+		Account::write( out );
+		tic::write( out, bought );
+		tic::write( out, refunded );
 	}
 	void read( istream & in ) {
-		User::read( in );
-		read( in, bought );
-		read( in, refunded );
+		Account::read( in );
+		tic::read( in, bought );
+		tic::read( in, refunded );
 	}
 };
 class Manager : public Account {
@@ -94,11 +86,13 @@ class Manager : public Account {
 	Manager( string id, string name = string(), string password = string() )
 		:Account(id,name,password){ }
 	void write( ostream & out ) {
-		User::write( out );
+		Account::write( out );
 	}
 	void read( istream & in ) {
-		User::read( in );
+		Account::read( in );
 	}
 };
+
+}
 
 #endif

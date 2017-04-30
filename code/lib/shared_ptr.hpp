@@ -1,8 +1,8 @@
 /*
  * shared_ptr.h - implement the shared_ptr template
  */
-#ifndef TICKET_MAP_HPP
-#define TICKET_MAP_HPP
+#ifndef TICKET_SHARED_PTR_HPP
+#define TICKET_SHARED_PTR_HPP
 #include "exceptions.hpp"
 
 namespace tic {
