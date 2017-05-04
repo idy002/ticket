@@ -33,6 +33,17 @@ struct Time {
 		seq.minite %= 60;
 		return seq;
 	}
+	Time operator+( const Time &rhs ) const {
+		Time ans;
+		ans.hour = hour + rhs.hour;
+		ans.minite = minite + rhs.minite;
+		ans.second = second + rhs.second;
+		ans.minite += ans.second / 60;
+		ans.second %= 60;
+		ans.hour += ans.minite / 60;
+		ans.minite %= 60;
+		return ans;
+	}
 	bool operator<( const Time &rhs ) const {
 		if( hour != rhs.hour ) return hour < rhs.hour;
 		if( minite != rhs.minite ) return minite < rhs.minite;

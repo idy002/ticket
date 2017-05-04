@@ -46,6 +46,10 @@ namespace tic {
 
 	class refund_more_than_bought : public exception {
 	};
+	class fail_to_open_file : public exception {
+	};
+	class unexcepted_file_format : public exception {
+	};
 
 }
 

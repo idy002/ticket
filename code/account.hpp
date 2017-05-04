@@ -12,12 +12,13 @@ using tic::read;
 namespace tic {
 
 class Account {
+	protected:
 	string id;
 	string name;
 	string password;
 
 	public:
-	Account( string id, string name = string(), string password = string() ) {
+	Account( string id = string(), string name = string(), string password = string() ) {
 		this->id = id;
 		this->name = name;
 		this->password = password;
@@ -25,13 +26,13 @@ class Account {
 	string getPassword() {
 		return password;
 	}
-	void setPassword( string password ) {
+	void modifyPassword( string password ) {
 		this->password = password;
 	}
 	string getName() {
 		return name;
 	}
-	void setName( string name ) {
+	void modifyName( string name ) {
 		this->name = name;
 	}
 	void write( ostream & out ) {
@@ -50,8 +51,7 @@ class User : public Account {
 	map<Ticket,int> refunded;
 	
 	public:
-	User( string id, string name = string(), string password = string() )
-		:Account(id,name,password){ }
+	User( string id = string(), string name = string(), string password = string() ) :Account(id,name,password){ }
 	void addTicket( Ticket tc, int cnt ) {
 		bought[tc] += cnt;
 	}
@@ -83,8 +83,7 @@ class User : public Account {
 };
 class Manager : public Account {
 	public:
-	Manager( string id, string name = string(), string password = string() )
-		:Account(id,name,password){ }
+	Manager( string id = string(), string name = string(), string password = string() ) :Account(id,name,password){ }
 	void write( ostream & out ) {
 		Account::write( out );
 	}

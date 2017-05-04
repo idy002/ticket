@@ -5,13 +5,17 @@
 #define TICKET_LIB_HPP
 
 #include <string>
+#include <fstream>
+#include <sstream>
 
 using std::string;
+using std::ifstream;
+using std::ofstream;
 
+#include "vector.hpp"
 #include "map.hpp"
 #include "exceptions.hpp"
 #include "utility.hpp"
-#include "vector.hpp"
 #include "set.hpp"
 #include "time.hpp"
 #include "shared_ptr.hpp"
@@ -25,8 +29,7 @@ using tic::map;
 using tic::shared_ptr;
 using tic::read;
 using tic::write;
+using tic::vector;
 
-#include <vector>
-using std::vector;
 
 #endif

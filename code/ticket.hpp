@@ -13,11 +13,12 @@ struct Ticket {
 	string from, to;
 	string type;
 	Date date;
-	Time during;
+	Time leave, arrive;
 	int dist;
 	double price;
 
 	bool operator<( const Ticket & rhs ) const {
+		if( trainid != rhs.trainid ) return trainid < rhs.trainid;
 		if( date != rhs.date ) return date < rhs.date;
 		if( from != rhs.from ) return from < rhs.from;
 		if( to != rhs.to ) return to < rhs.to;
@@ -25,7 +26,7 @@ struct Ticket {
 		return false;
 	}
 	bool operator==( const Ticket & rhs ) const {
-		return (date == rhs.date && from == rhs.from && to == rhs.to && type == rhs.type);
+		return (trainid == rhs.trainid && date == rhs.date && from == rhs.from && to == rhs.to && type == rhs.type);
 	}
 	void write( ostream & out ) {
 		tic::write( out, date );
@@ -34,7 +35,8 @@ struct Ticket {
 		tic::write( out, to );
 		tic::write( out, type );
 		tic::write( out, dist );
-		tic::write( out, during );
+		tic::write( out, leave);
+		tic::write( out, arrive);
 		tic::write( out, price );
 	}
 	void read( istream & in ) {
@@ -44,7 +46,8 @@ struct Ticket {
 		tic::read( in, to );
 		tic::read( in, type );
 		tic::read( in, dist );
-		tic::read( in, during );
+		tic::read( in, leave );
+		tic::read( in, arrive );
 		tic::read( in, price );
 	}
 };

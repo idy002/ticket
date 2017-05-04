@@ -6,7 +6,9 @@
 
 #include <string>
 
-#include "lib/date.hpp"
+#include "lib/time.hpp"
+
+namespace tic {
 
 struct Log {
 	Date date;
@@ -17,6 +19,18 @@ struct Log {
 		return time < rhs.time;
 		return false;
 	}
+	void write( ostream & out ) {
+		tic::write( out, date );
+		tic::write( out, time );
+		tic::write( out, message );
+	}
+	void read( istream & in ) {
+		tic::read( in, date );
+		tic::read( in, time );
+		tic::read( in, message );
+	}
+};
+
 }
 
 #endif
