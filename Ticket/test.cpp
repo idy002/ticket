@@ -10,7 +10,7 @@ using std::fstream;
 
 tic::Railway railway;
 
-int main() {
+int tmain() {
 	fstream fs;
 	fs.open( "tic.data" );
 	railway.readTrainFromFile( "../data/trains.out" );

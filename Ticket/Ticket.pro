@@ -24,8 +24,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    test.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += \
+    account.hpp \
+    log.hpp \
+    railway.hpp \
+    ticket.hpp \
+    train.hpp \
+    lib/exceptions.hpp \
+    lib/lib.hpp \
+    lib/map.hpp \
+    lib/set.hpp \
+    lib/shared_ptr.hpp \
+    lib/time.hpp \
+    lib/utility.hpp \
+    lib/vector.hpp \
+    mainwindow.hpp
 
 FORMS    += mainwindow.ui
+
+DISTFILES +=
