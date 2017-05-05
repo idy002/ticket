@@ -91,8 +91,8 @@ namespace tic {
 		}
 	template<class T> 
 		T min( const T &a, const T &b ) {
-			if( a < b ) return b;
-			return a;
+			if( a < b ) return a;
+			return b;
 		}
 	template<class T>
 		void swap( T &a, T &b ) {
