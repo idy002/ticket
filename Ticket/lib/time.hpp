@@ -6,9 +6,15 @@
 
 #include <istream>
 #include <ostream>
+#include <QTime>
+#include <QDate>
 
 namespace tic {
 
+typedef QTime Time;
+typedef QDate Date;
+
+/*
 struct Time {
 	int hour;		//	[0,24)
 	int minite;		//	[0,60)
@@ -93,6 +99,7 @@ struct Date {
 		tic::read( in, day );
 	}
 };
+*/
 
 }
 

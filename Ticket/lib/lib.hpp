@@ -4,11 +4,13 @@
 #ifndef TICKET_LIB_HPP
 #define TICKET_LIB_HPP
 
-#include <string>
+#include <QString>
+
+typedef QString string;
+
 #include <fstream>
 #include <sstream>
 
-using std::string;
 using std::ifstream;
 using std::ofstream;
 

@@ -12,7 +12,7 @@ using tic::read;
 namespace tic {
 
 class Account {
-	protected:
+    public:
 	string id;
 	string name;
 	string password;

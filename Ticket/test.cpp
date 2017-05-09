@@ -8,7 +8,6 @@
 using tic::Train;
 using std::fstream;
 
-tic::Railway railway;
 
 int tmain() {
 	fstream fs;
@@ -16,6 +15,7 @@ int tmain() {
 	railway.readTrainFromFile( "../data/trains.out" );
 	railway.print();
 	write( fs, railway );
+    return 0;
 }
 
 

@@ -25,7 +25,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    test.cpp
+    test.cpp \
+    logindialog.cpp \
+    userdialog.cpp \
+    buyquerydialog.cpp \
+    myticketdialog.cpp \
+    buydialog.cpp \
+    refunddialog.cpp \
+    infodialog.cpp \
+    utility.cpp \
+    managerdialog.cpp \
+    addtraindialog.cpp \
+    deltraindialog.cpp \
+    querytraindialog.cpp \
+    prequerytraindialog.cpp
 
 HEADERS  += \
     account.hpp \
@@ -41,8 +54,32 @@ HEADERS  += \
     lib/time.hpp \
     lib/utility.hpp \
     lib/vector.hpp \
-    mainwindow.hpp
+    mainwindow.hpp \
+    logindialog.h \
+    userdialog.h \
+    buyquerydialog.h \
+    myticketdialog.h \
+    buydialog.h \
+    refunddialog.h \
+    infodialog.h \
+    managerdialog.h \
+    addtraindialog.h \
+    deltraindialog.h \
+    querytraindialog.h \
+    prequerytraindialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    logindialog.ui \
+    userdialog.ui \
+    buyquerydialog.ui \
+    myticketdialog.ui \
+    buydialog.ui \
+    refunddialog.ui \
+    infodialog.ui \
+    managerdialog.ui \
+    addtraindialog.ui \
+    deltraindialog.ui \
+    querytraindialog.ui \
+    prequerytraindialog.ui
 
 DISTFILES +=

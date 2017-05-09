@@ -13,25 +13,16 @@ struct Seat {
 	string type;
 	vector<double> prices;
 	vector<int> remains;
-	bool hasStop;
-	int total, sellout;
 
-	Seat() {
-		type = "";
-		hasStop = false;
-		total = sellout = 0;
-	}
 	void write( ostream & out ) {
 		tic::write( out, type );
 		tic::write( out, prices );
 		tic::write( out, remains );
-		tic::write( out, hasStop );
 	}
 	void read( istream & in ) {
 		tic::read( in, type );
 		tic::read( in, prices );
 		tic::read( in, remains );
-		tic::read( in, hasStop );
 	}
 };
 struct Train {
@@ -39,8 +30,11 @@ struct Train {
 	vector<string> stations;
 	vector<int> dists;
 	vector<Time> arrive, leave;
-	map<Date,vector<Seat>> seats;
-	bool hasStop;
+    map<Date,pair<bool,map<string,Seat>>> seats;
+
+    inline bool isZero( double x ) {
+        return x > -1e-8 && x < 1e-8;
+    }
 
 	public:
 	void init() { 
@@ -50,26 +44,44 @@ struct Train {
 		arrive.clear();
 		leave.clear();
 		seats.clear();
-		hasStop = false;
 	}
+
 	bool operator<( const Train & rhs ) const {
 		return id < rhs.id;
 	}
-	void queryTicket( Date date, string from, string to, vector<pair<Ticket,int>> & result ) {
-		if( seats.count(date) == 0 ) return;
-		vector<Seat> &vseat = seats[date];
+
+    void startSell( Date date ) {
+        if( !seats.count(date) )
+            seats[date] = seats[Date(0,0,0)];
+        seats[date].first = true;
+    }
+
+    void stopSell( Date date ) {
+        if( seats.count(date) )
+            seats[date].first = false;
+    }
+
+    bool isSelling( Date date ) {
+        if( seats.count(date) == 0 ) return false;
+        else return seats[date].first;
+    }
+
+    void queryTicket( Date date, string from, string to, vector<pair<Ticket,int>> & result ) {
+        if( !isSelling(date) ) return;
+        map<string,Seat> &vseat = seats[date].second;
 		int tfrom, tto;
-		for( int t = 0; t < (int)stations.size(); t++ ) {
-			if( stations[t] == from ) tfrom = t;
-			if( stations[t] == to ) tto = t;
-		}
-		if( tfrom >= tto ) return;
-		for( int t = 0; t < (int)vseat.size(); t++ ) {
-			Seat &seat = vseat[t];
+        for( int t = 0; t < (int)stations.size(); t++ ) {
+            if( stations[t] == from ) tfrom = t;
+            if( stations[t] == to ) tto = t;
+        }
+        for( auto it = vseat.begin(); it != vseat.end(); ++it ) {
+            Seat &seat = it->second;
+            if( tto && isZero(seat.prices[tto]) ) continue;
+            if( tfrom && isZero(seat.prices[tfrom]) ) continue;
+
 			int available = seat.remains[tfrom+1];
 			for( int tt = tfrom + 1; tt <= tto; tt++ ) 
 				available = min( available, seat.remains[tt] );
-			if( seat.hasStop ) available = 0;
 			Ticket ticket;
 			ticket.date = date;
 			ticket.trainid = id;
@@ -83,79 +95,72 @@ struct Train {
 			result.push_back( pair<Ticket,int>( ticket, available ) );
 		}
 	}
-	void buyTicket( Date date, string from, string to, string type, int cnt, pair<Ticket,int> & result ) {
-		result.second = 0;
-		if( seats.count(date) == 0 ) return;
-		vector<Seat> &vseat = seats[date];
+
+    bool buyTicket( Date date, string from, string to, string type, int cnt, pair<Ticket,int> & result ) {
+        if( !isSelling(date) ) return false;
+        if( !seats[date].second.count(type) ) return false;
+
 		int tfrom, tto;
 		for( int t = 0; t < (int)stations.size(); t++ ) {
 			if( stations[t] == from ) tfrom = t;
 			if( stations[t] == to ) tto = t;
 		}
-		if( tfrom >= tto ) return;
-		for( int t = 0; t < (int)vseat.size(); t++ ) {
-			Seat &seat = vseat[t];
-			if( seat.type != type ) continue;
-			int available = seat.remains[tfrom+1];
-			for( int tt = tfrom + 1; tt <= tto; tt++ ) 
-				available = min( available, seat.remains[tt] );
-			available = min( available, cnt );
-			if( seat.hasStop ) available = 0;
-			if( available > 0 ) {
-				Ticket & ticket = result.first;
-				ticket.trainid = id;
-				ticket.date = date;
-				ticket.from = from;
-				ticket.to = to;
-				ticket.type = seat.type;
-				ticket.leave = leave[tfrom];
-				ticket.arrive = arrive[tto];
-				ticket.dist = dists[tto] - dists[tfrom];
-				ticket.price = seat.prices[tto] - seat.prices[tfrom];
-				result.second = available;
-				return;
-			}
-		}
+
+        Seat &seat = seats[date].second[type];
+        if( tfrom && isZero(seat.prices[tfrom]) ) return false;
+        if( tto && isZero(seat.prices[tto] )) return false;
+
+        int available = seat.remains[tfrom+1];
+        for( int tt = tfrom + 1; tt <= tto; tt++ )
+            available = min( available, seat.remains[tt] );
+        available = min( available, cnt );
+        for( int tt = tfrom + 1; tt <= tto; tt++ )
+            seat.remains[tt] -= available;
+        Ticket & ticket = result.first;
+        ticket.trainid = id;
+        ticket.date = date;
+        ticket.from = from;
+        ticket.to = to;
+        ticket.type = seat.type;
+        ticket.leave = leave[tfrom];
+        ticket.arrive = arrive[tto];
+        ticket.dist = dists[tto] - dists[tfrom];
+        ticket.price = seat.prices[tto] - seat.prices[tfrom];
+        result.second = available;
+        return true;
 	}
-	void buyTicket( const Ticket & ticket, int cnt ) {
-		int tfrom, tto;
+
+    int buyTicket( const Ticket & ticket, int cnt ) {
+        if( !isSelling(ticket.date) ) return 0;
+
+        int tfrom, tto;
 		for( int t = 0; t < (int)stations.size(); t++ ) {
 			if( ticket.from == stations[t] ) tfrom = t;
 			if( ticket.to == stations[t] ) tto = t;
-		}
-		if( tfrom >= tto ) return;
-		vector<Seat> &vseat = seats.at( ticket.date );
-		for( int t = 0; t < (int)vseat.size(); t++ ) {
-			if( vseat[t].type == ticket.type ) {
-				Seat &seat = vseat[t];
-				int available = seat.remains[tfrom+1];
-				for( int tt = tfrom + 1; tt <= tto; tt++ )
-					available = min( available, seat.remains[tt] );
-				int ret = min( available, cnt );
-				for( int tt = tfrom + 1; tt <= tto; tt++ )
-					seat.remains[tt] -= ret;
-				return;
-			}
-		}
-	}
-	void refundTicket( const Ticket & ticket, int cnt ) {
-		int tfrom, tto;
-		for( int t = 0; t < (int)stations.size(); t++ ) {
-			if( ticket.from == stations[t] ) tfrom = t;
-			if( ticket.to == stations[t] ) tto = t;
-		}
-		if( tfrom >= tto ) return;
-		vector<Seat> &vseat = seats.at( ticket.date );
-		for( int t = 0; t < (int)vseat.size(); t++ ) {
-			if( vseat[t].type == ticket.type ) {
-				Seat &seat = vseat[t];
-				for( int tt = tfrom + 1; tt <= tto; tt++ )
-					seat.remains[tt] += cnt;
-				return;
-			}
 		}
 
+        Seat &seat = seats[ticket.date].second[ticket.type];
+        int available = seat.remains[tfrom+1];
+        for( int tt = tfrom + 1; tt <= tto; tt++ )
+            available = min( available, seat.remains[tt] );
+        int ret = min( available, cnt );
+        for( int tt = tfrom + 1; tt <= tto; tt++ )
+            seat.remains[tt] -= ret;
+        return ret;
 	}
+
+	void refundTicket( const Ticket & ticket, int cnt ) {
+        int tfrom, tto;
+        for( int t = 0; t < (int)stations.size(); t++ ) {
+            if( ticket.from == stations[t] ) tfrom = t;
+            if( ticket.to == stations[t] ) tto = t;
+        }
+
+        Seat &seat = seats[ticket.date].second[ticket.type];
+        for( int tt = tfrom + 1; tt <= tto; tt++ )
+            seat.remains[tt] += cnt;
+	}
+
 	void write( ostream & out ) {
 		tic::write( out, id );
 		tic::write( out, stations );
@@ -164,6 +169,7 @@ struct Train {
 		tic::write( out, leave );
 		tic::write( out, seats );
 	}
+
 	void read( istream & in ) {
 		tic::read( in, id );
 		tic::read( in, stations );
