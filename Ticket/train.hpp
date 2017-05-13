@@ -52,7 +52,7 @@ struct Train {
 
     void startSell( Date date ) {
         if( !seats.count(date) )
-            seats[date] = seats[Date(0,0,0)];
+            seats[date] = seats[Date(1,1,1)];
         seats[date].first = true;
     }
 
@@ -61,9 +61,20 @@ struct Train {
             seats[date].first = false;
     }
 
+    void delSell( Date date ) {
+        if( seats.count(date) ) {
+            seats.erase( seats.find(date) );
+        }
+    }
+
     bool isSelling( Date date ) {
-        if( seats.count(date) == 0 ) return false;
-        else return seats[date].first;
+        size_t cnt = seats.count(date);
+        if( cnt == 0 ) {
+            return false;
+        } else {
+            bool status = seats[date].first;
+            return status;
+        }
     }
 
     void queryTicket( Date date, string from, string to, vector<pair<Ticket,int>> & result ) {

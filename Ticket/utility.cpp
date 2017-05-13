@@ -2,7 +2,9 @@
 #include <QDate>
 #include <QTime>
 #include <QChar>
+#include <QDebug>
 
+        extern int cccnt;
 namespace tic {
     void read( istream &in, int & val ) { read_default(in,val); }
     void write( ostream &out, int & val ) { write_default(out,val); }
@@ -10,24 +12,30 @@ namespace tic {
     void write( ostream &out, double & val ) { write_default(out,val); }
     void read( istream &in, bool & val ) { read_default(in,val); }
     void write( ostream &out, bool & val ) { write_default(out,val); }
+    void read( istream &in, uchar &v ) { read_default(in,v); }
+    void write( ostream &out, uchar &v ) { write_default(out,v); }
     void read( istream &in, ushort &v ) { read_default(in,v); }
     void write( ostream &out, ushort &v ) { write_default(out,v); }
+    void read( istream &in, size_t & val ) { read_default(in,val); }
+    void write( ostream &out, size_t & val ) { write_default(out,val); }
+//    void read( istream &in, void * &v ) { read_default(in,v); }
+//   void write( ostream &out, void * &v ) { write_default(out,v); }
     void read( istream & in, string & str ) {
         int len;
         read( in, len );
         str.clear();
-        while(len--) {
-            ushort ch;
-            read( in, ch );
-            str.push_back(ch);
+        for( int i = 0; i < len; i++ ) {
+            ushort code;
+            read( in, code );
+            str.push_back(QChar(code));
         }
     }
     void write( ostream & out, string & str ) {
         int len = str.size();
         write( out, len );
         for( int i = 0; i < len; i++ ) {
-            ushort ch = str[i].unicode();
-            write( out, ch );
+            ushort code = str[i].unicode();
+            write( out, code );
         }
     }
     void write( ostream &out, Date & date ) {

@@ -4,12 +4,14 @@
 //#include <utility>
 
 #include <istream>
+#include <fstream>
 #include <ostream>
 #include <string>
 #include <sstream>
 #include <QTime>
 #include <QDate>
 #include <QString>
+#include "exceptions.hpp"
 
 namespace tic {
 	//	utilities for file input/output
@@ -47,14 +49,36 @@ namespace tic {
     template<class T>
     void read_default( istream & in, T & val ) {
         in.read( (char*) & val, sizeof(val) );
+      //  in >> val;
     }
     template<class T>
     void write_default( ostream & out, T & val ) {
+     //   out << val << " ";
         out.write( (char*) & val, sizeof(val) );
+    }
+    template<class T>
+    void load( const char * filename, T & val ) {
+        std::ifstream in;
+        in.open( filename, std::ios_base::in | std::ios_base::binary );
+        if( in.fail() )
+            throw tic::fail_to_open_file();
+        read( in, val );
+        in.close();
+    }
+    template<class T>
+    void save( const char * filename, T & val ) {
+        std::ofstream out;
+        out.open( filename, std::ios_base::out | std::ios_base::binary | std::ios_base::trunc );
+        if( out.fail() )
+            throw tic::fail_to_open_file();
+        write( out, val );
+        out.close();
     }
 
     void read( istream &in, int & val );
     void write( ostream &out, int & val );
+    void read( istream &in, size_t & val );
+    void write( ostream &out, size_t & val );
     void read( istream &in, double & val );
     void write( ostream &out, double & val );
     void read( istream &in, bool & val );
@@ -65,8 +89,12 @@ namespace tic {
     void write( ostream &out, Date & date );
     void read( istream &in, Time & time );
     void write( ostream &out, Time & time );
+    void read( istream &in, uchar &v );
+    void write( ostream &out, uchar &v );
     void read( istream &in, ushort &v );
     void write( ostream &out, ushort &v );
+    void read( istream &in, void * &v );
+    void write( ostream &out, void * &v );
     //	utilities for general use
     template<class T1, class T2>
         class pair {

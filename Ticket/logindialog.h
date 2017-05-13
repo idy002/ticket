@@ -18,6 +18,10 @@ public:
 private slots:
     void on_loginPushButton_clicked();
 
+    void on_forgetPwdPushButton_clicked();
+
+    void on_signupPushButton_clicked();
+
 private:
     Ui::LoginDialog *ui;
 private:

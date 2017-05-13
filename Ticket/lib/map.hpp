@@ -180,9 +180,12 @@ namespace tic {
 			}
 			Node *find( Node *nd, const Key & key ) const {
 				if( nd == pend ) return nd;
-				if( equal( nd->pvalue->first, key ) ) return nd;
-				if( cmp(nd->pvalue->first,key) ) return find( nd->rson, key );
-				else return find( nd->lson, key );
+                if( equal( nd->pvalue->first, key ) )
+                    return nd;
+                if( cmp(nd->pvalue->first,key) )
+                    return find( nd->rson, key );
+                else
+                    return find( nd->lson, key );
 			}
 			void erase( Node *nd ) {
 				if( nd->lson != pend && nd->rson != pend ) {
@@ -585,7 +588,11 @@ namespace tic {
 			 */
 			T & at(const Key &key) {
 				Node *node = find(pend->lson,key);
-				if( node == pend ) throw index_out_of_bound();
+                if( node == pend ) {
+                    qDebug() << (void*)node;
+                    qDebug() << (void*)pend;
+                    throw index_out_of_bound();
+                }
 				return node->pvalue->second;
 			}
 			const T & at(const Key &key) const {
@@ -709,28 +716,28 @@ namespace tic {
 				int n = (int)size();
 				Node *cur;
 
-				out.write( (char*) &n, sizeof(n) );
+                tic::write( out, n );
 				cur = pend->next;
 				for( int i = 0; i < n; i++, cur = cur->next ) 
 					cur->index = i;
 				pend->index = n;
 				cur = pend->next;
 				for( int i = 0; i < n; i++, cur = cur->next ) {
-					out.write( (char*) & cur->par->index, sizeof(int) );
-					out.write( (char*) & cur->lson->index, sizeof(int) );
-					out.write( (char*) & cur->rson->index, sizeof(int) );
-					out.write( (char*) & cur->prev->index, sizeof(int) );
-					out.write( (char*) & cur->next->index, sizeof(int) );
-					out.write( (char*) & cur->height, sizeof(int) );
-					out.write( (char*) & cur->size, sizeof(int) );
+                    tic::write( out, cur->par->index );
+                    tic::write( out, cur->lson->index );
+                    tic::write( out, cur->rson->index );
+                    tic::write( out, cur->prev->index );
+                    tic::write( out, cur->next->index );
+                    tic::write( out, cur->height );
+                    tic::write( out, cur->size );
 					tic::write( out, cur->pvalue->first );
 					tic::write( out, cur->pvalue->second );
 				}
 			}
 			void read( std::istream &in ) {
 				int n;
-				in.read( (char*) &n, sizeof(int) );
 
+                tic::read( in, n );
 				if( n == 0 ) {
 					clear();
 				} else {
@@ -738,15 +745,15 @@ namespace tic {
 					clear();
 					for( int i = 0; i < n; i++ ) {
 						pool[i] = new Node;
-						in.read( (char*) & pool[i]->par, sizeof(int) );
-						in.read( (char*) & pool[i]->lson, sizeof(int) );
-						in.read( (char*) & pool[i]->rson, sizeof(int) );
-						in.read( (char*) & pool[i]->prev, sizeof(int) );
-						in.read( (char*) & pool[i]->next, sizeof(int) );
-						in.read( (char*) & pool[i]->height, sizeof(int) );
-						in.read( (char*) & pool[i]->size, sizeof(int) );
-						pool[i]->pvalue = new value_type;
-						tic::read( in, pool[i]->pvalue->first );
+                        pool[i]->pvalue = new value_type;
+                        tic::read( in, *((int*)&pool[i]->par) );
+                        tic::read( in, *((int*)&pool[i]->lson) );
+                        tic::read( in, *((int*)&pool[i]->rson) );
+                        tic::read( in, *((int*)&pool[i]->prev) );
+                        tic::read( in, *((int*)&pool[i]->next) );
+                        tic::read( in, pool[i]->height );
+                        tic::read( in, pool[i]->size );
+                        tic::read( in, pool[i]->pvalue->first );
 						tic::read( in, pool[i]->pvalue->second );
 					}
 					pool[n] = pend;

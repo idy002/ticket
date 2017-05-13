@@ -44,7 +44,7 @@
     <string>你好！</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>310</x>
@@ -95,31 +95,6 @@
       </property>
       <property name="text">
        <string>购票</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="refundTicketButton">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>150</width>
-        <height>50</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>150</width>
-        <height>50</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>退票</string>
       </property>
      </widget>
     </item>

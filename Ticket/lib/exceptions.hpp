@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <cstring>
 #include <string>
+#include <QDebug>
 
 namespace tic {
 	class exception {
@@ -14,7 +15,9 @@ namespace tic {
 			const std::string variant = "";
 			std::string detail = "";
 		public:
-			exception() {}
+            exception() {
+                qDebug() << "oh No!";
+            }
 			exception(const exception &ec) : variant(ec.variant), detail(ec.detail) {}
 			virtual std::string what() {
 				return variant + " " + detail;

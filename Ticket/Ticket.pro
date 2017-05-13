@@ -25,20 +25,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    test.cpp \
     logindialog.cpp \
     userdialog.cpp \
     buyquerydialog.cpp \
     myticketdialog.cpp \
     buydialog.cpp \
-    refunddialog.cpp \
     infodialog.cpp \
     utility.cpp \
     managerdialog.cpp \
     addtraindialog.cpp \
     deltraindialog.cpp \
     querytraindialog.cpp \
-    prequerytraindialog.cpp
+    signupdialog.cpp \
+    addtrainquerydialog.cpp \
+    queryuserdialog.cpp \
+    logdialog.cpp \
+    welcomedialog.cpp
 
 HEADERS  += \
     account.hpp \
@@ -60,13 +62,16 @@ HEADERS  += \
     buyquerydialog.h \
     myticketdialog.h \
     buydialog.h \
-    refunddialog.h \
     infodialog.h \
     managerdialog.h \
     addtraindialog.h \
     deltraindialog.h \
     querytraindialog.h \
-    prequerytraindialog.h
+    signupdialog.h \
+    addtrainquerydialog.h \
+    queryuserdialog.h \
+    logdialog.h \
+    welcomedialog.h
 
 FORMS    += mainwindow.ui \
     logindialog.ui \
@@ -74,12 +79,18 @@ FORMS    += mainwindow.ui \
     buyquerydialog.ui \
     myticketdialog.ui \
     buydialog.ui \
-    refunddialog.ui \
     infodialog.ui \
     managerdialog.ui \
     addtraindialog.ui \
     deltraindialog.ui \
     querytraindialog.ui \
-    prequerytraindialog.ui
+    signupdialog.ui \
+    addtrainquerydialog.ui \
+    queryuserdialog.ui \
+    logdialog.ui \
+    welcomedialog.ui
 
 DISTFILES +=
+
+RESOURCES += \
+    images.qrc

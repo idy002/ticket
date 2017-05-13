@@ -20,8 +20,6 @@ private slots:
 
     void on_buyTicketButton_clicked();
 
-    void on_refundTicketButton_clicked();
-
     void on_modifyInfoButton_clicked();
 
 private:

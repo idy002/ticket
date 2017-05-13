@@ -22,6 +22,16 @@ private slots:
 
     void on_showPushButton_clicked();
 
+    void on_myTiccketButton_clicked();
+
+    void on_buyTicketButton_clicked();
+
+    void on_modifyInfoButton_clicked();
+
+    void on_showPushButton_2_clicked();
+
+    void on_logPushButton_clicked();
+
 private:
     Ui::ManagerDialog *ui;
 };

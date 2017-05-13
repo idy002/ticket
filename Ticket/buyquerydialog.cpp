@@ -7,6 +7,7 @@ BuyQueryDialog::BuyQueryDialog(QWidget *parent) :
     ui(new Ui::BuyQueryDialog)
 {
     ui->setupUi(this);
+    ui->dateEdit->setDate( QDate::currentDate() );
 }
 
 BuyQueryDialog::~BuyQueryDialog()
@@ -20,5 +21,7 @@ void BuyQueryDialog::on_pushButton_clicked()
     QString from = ui->startLineEdit->text();
     QString to = ui->endLineEdit->text();
     BuyDialog buyDialog(this,date,from,to);
+    this->hide();
     buyDialog.exec();
+    accept();
 }

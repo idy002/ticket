@@ -20,7 +20,13 @@ public:
     explicit BuyDialog(QWidget *parent, QDate date, QString from, QString to);
     ~BuyDialog();
 
-    void setQueryInfo( QDate date, QString from, QString to );
+private slots:
+    void on_tableWidget_itemSelectionChanged();
+
+    void on_buyPushButton_clicked();
+
+private:
+    void refresh();
 
 private:
     Ui::BuyDialog *ui;

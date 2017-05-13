@@ -15,6 +15,9 @@ public:
     explicit InfoDialog(QWidget *parent = 0);
     ~InfoDialog();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::InfoDialog *ui;
 };

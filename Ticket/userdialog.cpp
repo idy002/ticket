@@ -1,7 +1,6 @@
-#include "userdialog.h"
 #include "ui_userdialog.h"
+#include "userdialog.h"
 #include "buydialog.h"
-#include "refunddialog.h"
 #include "myticketdialog.h"
 #include "infodialog.h"
 #include "buyquerydialog.h"
@@ -28,12 +27,6 @@ void UserDialog::on_buyTicketButton_clicked()
 {
     BuyQueryDialog buyQueryDialog;
     buyQueryDialog.exec();
-}
-
-void UserDialog::on_refundTicketButton_clicked()
-{
-    RefundDialog refundDialog;
-    refundDialog.exec();
 }
 
 void UserDialog::on_modifyInfoButton_clicked()

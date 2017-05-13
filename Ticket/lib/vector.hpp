@@ -7,6 +7,7 @@
 #include <vector>
 #include <istream>
 #include <ostream>
+#include <QDebug>
 
 #include "utility.hpp"
 
@@ -53,16 +54,18 @@ namespace tic {
 		}
 		void write( ostream & out ) {
 			size_t len = vc.size();
-			out.write( (char*) & len, sizeof(len) );
-			for( size_t i = 0; i < len; i++ )
+            tic::write( out, len );
+            for( size_t i = 0; i < len; i++ ) {
 				tic::write( out, vc[i] );
+            }
 		}
 		void read( istream & in ) {
 			size_t len;
-			in.read( (char*) & len, sizeof(len) );
+            tic::read( in, len );
 			vc.resize( len );
-			for( size_t i = 0; i < len; i++ )
+            for( size_t i = 0; i < len; i++ ) {
 				tic::read( in, vc[i] );
+            }
 		}
 	};
 }
