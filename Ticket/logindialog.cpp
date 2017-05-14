@@ -11,14 +11,14 @@ LoginDialog::LoginDialog(QWidget *parent) :
     ui(new Ui::LoginDialog)
 {
     ui->setupUi(this);
-    tic::load( "railway.data", railway );
-//    tic::load( "D:/TicketData/BigSet/railway.data", railway );
+//    tic::load( "railway.data", railway );
+    tic::load( "D:/TicketData/SmallSet/railway.data", railway );
 }
 
 LoginDialog::~LoginDialog()
 {
-    tic::save( "railway.data", railway );
-//    tic::save( "D:/TicketData/BigSet/railway.data", railway );
+//    tic::save( "railway.data", railway );
+    tic::save( "D:/TicketData/SmallSet/railway.data", railway );
     delete ui;
 }
 

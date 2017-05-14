@@ -61,12 +61,12 @@ void QueryUserDialog::update_userInfo() {
         for( int t = 0; t < (int)vec.size(); t++ ) {
             QString row[11];
             tic::Ticket & tk = vec[t].first;
-            row[0] = tk.date.toString();
+            row[0] = tk.date.toString(tic::DefaultDateFormat);
             row[1] = tk.trainid;
             row[2] = tk.from;
             row[3] = tk.to;
-            row[4] = tk.leave.toString();
-            row[5] = tk.arrive.toString();
+            row[4] = tk.leave.toString(tic::DefaultDateFormat);
+            row[5] = tk.arrive.toString(tic::DefaultDateFormat);
             row[6] = QString::number(tk.dist);
             row[7] = tk.type;
             row[8] = QString::number(tk.price,'f',1);

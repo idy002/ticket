@@ -18,6 +18,7 @@ namespace tic {
 using std::stringstream;
 
 const int DefaultPassengerNumber = 30;
+const QString DefaultDateFormat = "yyyy-MM-dd ddd";
 
 class Railway {
 	public:	//	TODO: change to private

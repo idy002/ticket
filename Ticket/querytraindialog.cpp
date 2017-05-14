@@ -56,7 +56,7 @@ void QueryTrainDialog::update_dateListWidget() {
     for( auto it = train.seats.begin(); it != train.seats.end(); ++it ) {
         dates.push_back( it->first );
         maxdate = tic::max( maxdate, it->first );
-        list << QString("[%1] %2").arg(it->second.first ? "正在销售" : "停止销售").arg(it->first.toString());
+        list << QString("[%1] %2").arg(it->second.first ? "正在销售" : "停止销售").arg(it->first.toString(tic::DefaultDateFormat));
     }
     if( maxdate == QDate() ) {
         maxdate = QDate::currentDate();
@@ -123,10 +123,10 @@ void QueryTrainDialog::update_tableWidget() {
     ui->tableWidget->setEditTriggers( QAbstractItemView::NoEditTriggers );
     ui->tableWidget->setSelectionBehavior( QAbstractItemView::SelectRows );
     for( int i = 0; i < n; i++ ) {
-        ui->tableWidget->setItem( i, 0, new QTableWidgetItem( date.toString() ) );
+        ui->tableWidget->setItem( i, 0, new QTableWidgetItem( date.toString(tic::DefaultDateFormat) ) );
         ui->tableWidget->setItem( i, 1, new QTableWidgetItem( train.stations[i] ) );
-        ui->tableWidget->setItem( i, 2, new QTableWidgetItem( train.leave[i].toString() ));
-        ui->tableWidget->setItem( i, 3, new QTableWidgetItem( train.arrive[i].toString() ));
+        ui->tableWidget->setItem( i, 2, new QTableWidgetItem( train.leave[i].toString(tic::DefaultDateFormat) ));
+        ui->tableWidget->setItem( i, 3, new QTableWidgetItem( train.arrive[i].toString(tic::DefaultDateFormat) ));
         ui->tableWidget->setItem( i, 4, new QTableWidgetItem( QString("%1").arg(train.dists[i]) ));
         int j = 0;
         for( auto it = pr.second.begin(); it != pr.second.end(); ++it, j++ ) {
@@ -180,7 +180,7 @@ void QueryTrainDialog::on_delPushButton_clicked()
     QDate date = dates[ui->dateListWidget->currentRow()];
     if( train.seats.count(date) == 0 ) return;
     if( QMessageBox::Yes == QMessageBox::question( this, "询问",
-           QString("请问您确定要删除 列车%1 %2 的记录，数据数据不可恢复！").arg(curTrainid).arg(date.toString()) ) ) {
+           QString("请问您确定要删除 列车%1 %2 的记录，数据数据不可恢复！").arg(curTrainid).arg(date.toString(tic::DefaultDateFormat)) ) ) {
         train.seats.erase( train.seats.find(date) );
         QMessageBox::question( this, "完成", "已删除");
         update_dateListWidget();

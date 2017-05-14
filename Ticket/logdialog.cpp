@@ -56,8 +56,8 @@ void LogDialog::on_queryPushButton_clicked()
     ui->tableWidget->verticalHeader()->setSectionResizeMode( QHeaderView::Fixed );
     ui->tableWidget->horizontalHeader()->setSectionResizeMode( QHeaderView::Stretch );
     for( int i = 0; i < showed; i++ ) {
-        ui->tableWidget->setItem( i, 0, new QTableWidgetItem( vc[i].date.toString() ));
-        ui->tableWidget->setItem( i, 1, new QTableWidgetItem( vc[i].time.toString() ));
+        ui->tableWidget->setItem( i, 0, new QTableWidgetItem( vc[i].date.toString(tic::DefaultDateFormat) ));
+        ui->tableWidget->setItem( i, 1, new QTableWidgetItem( vc[i].time.toString(tic::DefaultDateFormat) ));
         ui->tableWidget->setItem( i, 2, new QTableWidgetItem( vc[i].userid ));
         ui->tableWidget->setItem( i, 3, new QTableWidgetItem( vc[i].message ));
     }
