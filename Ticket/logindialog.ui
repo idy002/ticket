@@ -34,6 +34,10 @@
   <property name="windowTitle">
    <string>登录窗口</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="myicon.qrc">
+    <normaloff>:/myimages/images/timg - 副本.png</normaloff>:/myimages/images/timg - 副本.png</iconset>
+  </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
@@ -118,7 +122,9 @@
   <tabstop>loginPushButton</tabstop>
   <tabstop>exitPushButton</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="myicon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>exitPushButton</sender>

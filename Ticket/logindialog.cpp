@@ -42,6 +42,7 @@ void LoginDialog::on_loginPushButton_clicked()
             }
         } else {
             UserDialog userDialog;
+            this->hide();
             if( userDialog.exec() == QDialog::Accepted ) {
                 this->show();
             } else {

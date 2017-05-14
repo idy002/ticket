@@ -93,4 +93,6 @@ FORMS    += mainwindow.ui \
 DISTFILES +=
 
 RESOURCES += \
-    images.qrc
+    myicon.qrc
+
+RC_FILE = myapp.rc

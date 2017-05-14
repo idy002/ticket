@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     return 0;
     */
 
-    QPixmap pixmap( ":/images/timg.png" );
+    QPixmap pixmap( ":/myimages/images/timg.png" );
     QSplashScreen splash(pixmap);
     splash.show();
     splash.showMessage( "加载数据中..." );

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/myimages">
+        <file>images/timg.png</file>
+        <file>images/timg - 副本.png</file>
+    </qresource>
+</RCC>

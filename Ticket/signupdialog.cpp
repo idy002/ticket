@@ -23,7 +23,8 @@ void SignupDialog::on_signPushButton_clicked()
     pwd = ui->pwdLineEdit->text();
     repwd = ui->pwdLineEdit->text();
     if( id.length() < 6 ) {
-        QMessageBox::warning( this, "出错了", "至少为6位字符，请重新输入" );
+        QMessageBox::warning( this, "出错了", "用户名至少为6位字符，请重新输入" );
+        ui->idLineEdit->setFocus();
         return;
     }
     if( railway.users.count(id) ) {
@@ -34,6 +35,7 @@ void SignupDialog::on_signPushButton_clicked()
     }
     if( name.isEmpty() ) {
         QMessageBox::warning( this, "出错了", "姓名不能为空" );
+        ui->nameLineEdit->setFocus();
         return;
     }
     if( pwd != repwd ) {

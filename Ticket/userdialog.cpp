@@ -4,6 +4,7 @@
 #include "myticketdialog.h"
 #include "infodialog.h"
 #include "buyquerydialog.h"
+#include <QPainter>
 
 UserDialog::UserDialog(QWidget *parent) :
     QDialog(parent),
