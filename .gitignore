@@ -1,2 +1,5 @@
 *.out
-
+ui_*
+.o
+*.Debug
+*.Release
