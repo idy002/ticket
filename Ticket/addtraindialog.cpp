@@ -42,7 +42,17 @@ AddTrainDialog::AddTrainDialog(QWidget *parent, QString trainid, int stations_co
                 }
             } else {
                 if( j == 1 || j == 2 ) {
-                    ui->tableWidget->setCellWidget( i, j, new QDateTimeEdit );
+                    /*
+                    QDateTimeEdit *widget = new QDateTimeEdit();
+                    widget->setMinimumDate( QDate(1,1,1) );
+                    widget->setMaximumDate( QDate(1,12,30) );
+                    widget->setDate( QDate(1,1,1) );
+                    widget->setCalendarPopup( true );
+                    widget->setEnabled(true);
+                    ui->tableWidget->setCellWidget( i, j, widget );
+                    */
+                    ui->tableWidget->setCellWidget( i, j, new QDateTimeEdit() );
+                    QDateTimeEdit *dte = (QDateTimeEdit*)ui->tableWidget->cellWidget( i, j );
                 }
             }
         }
@@ -82,11 +92,11 @@ void AddTrainDialog::on_finishPushButton_clicked()
     }
     for( int i = 1; i <= stations_count; i++ ) {
         QString station;
-        QTime arrive, leave;
+        QDateTime arrive, leave;
         int dist;
         station = ui->tableWidget->item(i,0)->text();
-        arrive = ((QDateTimeEdit*)ui->tableWidget->cellWidget(i,1))->time();
-        leave = ((QDateTimeEdit*)ui->tableWidget->cellWidget(i,2))->time();
+        arrive = ((QDateTimeEdit*)ui->tableWidget->cellWidget(i,1))->dateTime();
+        leave = ((QDateTimeEdit*)ui->tableWidget->cellWidget(i,2))->dateTime();
         dist = ui->tableWidget->item(i,3)->text().toInt();
         if( station.isEmpty() ) {
             QMessageBox::warning( this, "出错了", QString("第 %1 站站名为空，请重新输入").arg(i) );
@@ -135,6 +145,15 @@ void AddTrainDialog::on_finishPushButton_clicked()
         }
     }
 //    railway.trains[trainid] = train;
+    QDate startDate = train.arrive.front().date();
+    int tot = (int)train.stations.size();
+    for( int i = 0; i < tot; i++ ) {
+        for( int t = 0; t < 2; t++ ) {
+            QDateTime & dt = (t == 0 ? train.arrive[i] : train.leave[i]);
+            int day = startDate.daysTo( dt.date() );
+            dt.setDate( QDate(1,1,day) );
+        }
+    }
     railway.addTrain( train );
     QMessageBox::information( this, "提示", QString("列车 %1 已成功添加").arg(trainid) );
     accept();

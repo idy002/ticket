@@ -13,7 +13,7 @@ struct Ticket {
 	string from, to;
 	string type;
 	Date date;
-	Time leave, arrive;
+    QDateTime leave, arrive;
 	int dist;
 	double price;
 

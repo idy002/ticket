@@ -15,6 +15,9 @@ public:
     explicit DelTrainDialog(QWidget *parent = 0);
     ~DelTrainDialog();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::DelTrainDialog *ui;
 };

@@ -30,15 +30,34 @@
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="0" column="0">
       <widget class="QGroupBox" name="groupBox">
+       <property name="font">
+        <font>
+         <family>华文楷体</family>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
        <property name="title">
         <string>选择列车</string>
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <item row="1" column="0" colspan="3">
-         <widget class="QListWidget" name="trainListWidget"/>
+         <widget class="QListWidget" name="trainListWidget">
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+         </widget>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label">
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>列车编号：</string>
           </property>
@@ -52,16 +71,35 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>查看</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="trainidLineEdit"/>
+         <widget class="QLineEdit" name="trainidLineEdit">
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+         </widget>
         </item>
         <item row="2" column="2">
          <widget class="QPushButton" name="pushButton_2">
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>查看此列车</string>
           </property>
@@ -72,15 +110,34 @@
      </item>
      <item row="0" column="1">
       <widget class="QGroupBox" name="groupBox_2">
+       <property name="font">
+        <font>
+         <family>华文楷体</family>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
        <property name="title">
         <string>售票情况</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0" colspan="3">
-         <widget class="QListWidget" name="dateListWidget"/>
+         <widget class="QListWidget" name="dateListWidget">
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+         </widget>
         </item>
         <item row="1" column="0">
          <widget class="QPushButton" name="restroePushButton">
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>恢复售票</string>
           </property>
@@ -88,6 +145,12 @@
         </item>
         <item row="1" column="1">
          <widget class="QPushButton" name="stopPushButton">
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>停止售票</string>
           </property>
@@ -95,6 +158,12 @@
         </item>
         <item row="1" column="2">
          <widget class="QPushButton" name="delPushButton">
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>删除当日记录</string>
           </property>
@@ -108,10 +177,22 @@
             <height>0</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
          </widget>
         </item>
         <item row="2" column="2">
          <widget class="QPushButton" name="startPushButton">
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>开始销售</string>
           </property>
@@ -122,6 +203,12 @@
      </item>
      <item row="1" column="0" colspan="2">
       <widget class="QGroupBox" name="groupBox_3">
+       <property name="font">
+        <font>
+         <family>华文楷体</family>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
        <property name="title">
         <string>当日售票统计</string>
        </property>
@@ -140,6 +227,12 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
          </widget>
         </item>
        </layout>
@@ -154,6 +247,12 @@
        <width>150</width>
        <height>16777215</height>
       </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>华文楷体</family>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>

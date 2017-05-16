@@ -19,6 +19,12 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QFrame" name="frame">
+     <property name="font">
+      <font>
+       <family>华文楷体</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -33,6 +39,12 @@
           <width>350</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>11</pointsize>
+         </font>
         </property>
         <property name="title">
          <string>选择用户</string>
@@ -49,6 +61,12 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>华文楷体</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>查看用户信息</string>
            </property>
@@ -56,6 +74,12 @@
          </item>
          <item row="0" column="2">
           <widget class="QPushButton" name="showPushButton">
+           <property name="font">
+            <font>
+             <family>华文楷体</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>查看</string>
            </property>
@@ -75,6 +99,12 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <family>华文楷体</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
           </widget>
          </item>
          <item row="0" column="0">
@@ -84,6 +114,12 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <family>华文楷体</family>
+             <pointsize>11</pointsize>
+            </font>
            </property>
            <property name="text">
             <string>用户名：</string>
@@ -101,6 +137,12 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="font">
+            <font>
+             <family>华文楷体</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
           </widget>
          </item>
         </layout>
@@ -114,6 +156,12 @@
           <height>135</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
@@ -126,23 +174,49 @@
          </property>
          <item row="0" column="0">
           <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <family>华文楷体</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>姓名：</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="nameLineEdit"/>
+          <widget class="QLineEdit" name="nameLineEdit">
+           <property name="font">
+            <font>
+             <family>华文楷体</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <family>华文楷体</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>密码：</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLineEdit" name="pwdLineEdit"/>
+          <widget class="QLineEdit" name="pwdLineEdit">
+           <property name="font">
+            <font>
+             <family>华文楷体</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
          <item row="3" column="1">
           <widget class="QPushButton" name="modifyLineEdit">
@@ -151,6 +225,12 @@
              <width>120</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>华文楷体</family>
+             <pointsize>11</pointsize>
+            </font>
            </property>
            <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
@@ -165,12 +245,25 @@
       </item>
       <item row="0" column="1" rowspan="2">
        <widget class="QGroupBox" name="groupBox_3">
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="title">
          <string>用户购票信息</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">
-          <widget class="QTableWidget" name="tableWidget"/>
+          <widget class="QTableWidget" name="tableWidget">
+           <property name="font">
+            <font>
+             <family>华文楷体</family>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -191,6 +284,12 @@
        <width>120</width>
        <height>16777215</height>
       </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>华文楷体</family>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>

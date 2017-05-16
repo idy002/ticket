@@ -36,7 +36,7 @@ void LogDialog::on_queryPushButton_clicked()
     tic::set<tic::Log> &logs = railway.logs;
     tic::vector<tic::Log> vc;
     int total = 0, showed = 0;
-    for( auto it = logs.begin(); it != logs.end(); ++it ) {
+    for( auto it = --logs.end(); ; --it ) {
         if( start <= it->date && it->date <= end && it->userid.count(userid) ) {
             total++;
             if( showed <= 1000 ) {
@@ -44,6 +44,7 @@ void LogDialog::on_queryPushButton_clicked()
                 vc.push_back( *it );
             }
         }
+        if( it == logs.begin() ) break;
     }
 
     QStringList header;
@@ -53,11 +54,11 @@ void LogDialog::on_queryPushButton_clicked()
     ui->tableWidget->setHorizontalHeaderLabels( header );
     ui->tableWidget->setEditTriggers( QAbstractItemView::NoEditTriggers );
     ui->tableWidget->setSelectionBehavior( QAbstractItemView::SelectRows );
-    ui->tableWidget->verticalHeader()->setSectionResizeMode( QHeaderView::Fixed );
-    ui->tableWidget->horizontalHeader()->setSectionResizeMode( QHeaderView::Stretch );
+//    ui->tableWidget->verticalHeader()->setSectionResizeMode( QHeaderView::Fixed );
+//    ui->tableWidget->horizontalHeader()->setSectionResizeMode( QHeaderView::Stretch );
     for( int i = 0; i < showed; i++ ) {
-        ui->tableWidget->setItem( i, 0, new QTableWidgetItem( vc[i].date.toString(tic::DefaultDateFormat) ));
-        ui->tableWidget->setItem( i, 1, new QTableWidgetItem( vc[i].time.toString(tic::DefaultDateFormat) ));
+        ui->tableWidget->setItem( i, 0, new QTableWidgetItem( vc[i].date.toString(DefaultDateFormat) ));
+        ui->tableWidget->setItem( i, 1, new QTableWidgetItem( vc[i].time.toString(DefaultTimeFormat) ));
         ui->tableWidget->setItem( i, 2, new QTableWidgetItem( vc[i].userid ));
         ui->tableWidget->setItem( i, 3, new QTableWidgetItem( vc[i].message ));
     }

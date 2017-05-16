@@ -21,6 +21,12 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QGroupBox" name="groupBox">
+       <property name="font">
+        <font>
+         <family>华文楷体</family>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
        </property>
@@ -35,6 +41,12 @@
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <family>华文楷体</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
             <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
@@ -45,6 +57,12 @@
           </item>
           <item>
            <widget class="QDateEdit" name="startDateEdit">
+            <property name="font">
+             <font>
+              <family>华文楷体</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
             <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
@@ -52,6 +70,12 @@
           </item>
           <item>
            <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <family>华文楷体</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
             <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
@@ -62,6 +86,12 @@
           </item>
           <item>
            <widget class="QDateEdit" name="endDateEdit">
+            <property name="font">
+             <font>
+              <family>华文楷体</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
             <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
@@ -69,6 +99,12 @@
           </item>
           <item>
            <widget class="QLabel" name="label_3">
+            <property name="font">
+             <font>
+              <family>华文楷体</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
             <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
@@ -79,6 +115,12 @@
           </item>
           <item>
            <widget class="QLineEdit" name="userLineEdit">
+            <property name="font">
+             <font>
+              <family>华文楷体</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
             <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
@@ -86,6 +128,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="queryPushButton">
+            <property name="font">
+             <font>
+              <family>华文楷体</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
             <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
@@ -101,12 +149,25 @@
      </item>
      <item>
       <widget class="QGroupBox" name="groupBox_2">
+       <property name="font">
+        <font>
+         <family>华文楷体</family>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
        <property name="title">
         <string>查询结果</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget"/>
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="font">
+           <font>
+            <family>华文楷体</family>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -115,6 +176,12 @@
    </item>
    <item row="1" column="0">
     <spacer name="horizontalSpacer">
+     <property name="font">
+      <font>
+       <family>华文楷体</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -139,6 +206,12 @@
        <width>120</width>
        <height>16777215</height>
       </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>华文楷体</family>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>

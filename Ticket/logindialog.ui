@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>300</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,14 +21,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>500</width>
-    <height>300</height>
+    <width>800</width>
+    <height>600</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>500</width>
-    <height>300</height>
+    <width>800</width>
+    <height>600</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -37,11 +37,17 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>100</y>
-     <width>351</width>
-     <height>161</height>
+     <x>150</x>
+     <y>230</y>
+     <width>461</width>
+     <height>251</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>华文宋体</family>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <property name="verticalSpacing">
@@ -49,6 +55,12 @@
     </property>
     <item row="0" column="0">
      <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <family>华文宋体</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>用户名：</string>
       </property>
@@ -56,6 +68,18 @@
     </item>
     <item row="2" column="0" colspan="2">
      <widget class="QPushButton" name="loginPushButton">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>华文宋体</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>登录</string>
       </property>
@@ -63,6 +87,12 @@
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <family>华文宋体</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>密码：</string>
       </property>
@@ -70,6 +100,18 @@
     </item>
     <item row="2" column="2">
      <widget class="QPushButton" name="exitPushButton">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>华文宋体</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>退出</string>
       </property>
@@ -77,6 +119,18 @@
     </item>
     <item row="0" column="1">
      <widget class="QLineEdit" name="idLE">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>35</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>华文宋体</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="placeholderText">
        <string>请输入用户名</string>
       </property>
@@ -84,6 +138,18 @@
     </item>
     <item row="1" column="1">
      <widget class="QLineEdit" name="pwdLE">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>35</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>华文宋体</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="inputMethodHints">
        <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
       </property>
@@ -97,6 +163,18 @@
     </item>
     <item row="0" column="2">
      <widget class="QPushButton" name="signupPushButton">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>华文宋体</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>注册</string>
       </property>
@@ -104,12 +182,84 @@
     </item>
     <item row="1" column="2">
      <widget class="QPushButton" name="forgetPwdPushButton">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>华文宋体</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>忘记密码</string>
       </property>
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>50</y>
+     <width>371</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>华文新魏</family>
+     <pointsize>48</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>闵行铁路局</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>70</y>
+     <width>131</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="myicon.qrc">:/myimages/images/loginr.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>70</y>
+     <width>131</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="myicon.qrc">:/myimages/images/loginl.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
   </widget>
  </widget>
  <tabstops>
@@ -118,7 +268,9 @@
   <tabstop>loginPushButton</tabstop>
   <tabstop>exitPushButton</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="myicon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>exitPushButton</sender>

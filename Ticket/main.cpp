@@ -3,7 +3,6 @@
 #include "logindialog.h"
 #include "userdialog.h"
 #include "managerdialog.h"
-#include "welcomedialog.h"
 #include <QMessageBox>
 #include <QApplication>
 #include <QSplashScreen>
@@ -13,6 +12,9 @@
 #include <new>
 
 Railway railway;
+QString DefaultDateFormat = "yyyy-MM-dd dddd";
+QString DefaultTimeFormat = "hh:mm AP";
+QString DefaultDateTimeFormat = "yyyy-MM-dd hh:mm";
 
 
 int main(int argc, char *argv[])
@@ -32,7 +34,7 @@ int main(int argc, char *argv[])
     return 0;
     */
 
-    QPixmap pixmap( ":/myimages/images/timg.png" );
+    QPixmap pixmap( ":/myimages/images/begin.png" );
     QSplashScreen splash(pixmap);
     splash.show();
     splash.showMessage( "加载数据中..." );

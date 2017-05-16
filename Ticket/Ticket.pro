@@ -40,7 +40,7 @@ SOURCES += main.cpp\
     addtrainquerydialog.cpp \
     queryuserdialog.cpp \
     logdialog.cpp \
-    welcomedialog.cpp
+    test.cpp
 
 HEADERS  += \
     account.hpp \
@@ -71,7 +71,9 @@ HEADERS  += \
     addtrainquerydialog.h \
     queryuserdialog.h \
     logdialog.h \
-    welcomedialog.h
+    lib/vector_hy.hpp \
+    vector_dyy.h \
+    lib/vector_dyy.h
 
 FORMS    += mainwindow.ui \
     logindialog.ui \

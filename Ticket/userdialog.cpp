@@ -5,12 +5,22 @@
 #include "infodialog.h"
 #include "buyquerydialog.h"
 #include <QPainter>
+#include <QTimer>
 
 UserDialog::UserDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::UserDialog)
 {
     ui->setupUi(this);
+    QTimer *timer = new QTimer(this);
+    connect( timer, SIGNAL(timeout()), this, SLOT(update_time()) );
+    timer->start( 1000 );
+    update_time();
+    ui->nameLabel->setText( QString("尊敬的 %1 ，您好！").arg(railway.users[railway.curUserid].name) );
+}
+
+void UserDialog::update_time() {
+    ui->timeLabel->setText( QDateTime::currentDateTime().toString("当前时间：yyyy-MM-dd hh:mm:ss"));
 }
 
 UserDialog::~UserDialog()

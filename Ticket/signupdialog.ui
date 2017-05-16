@@ -29,10 +29,16 @@
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>210</y>
+     <y>230</y>
      <width>93</width>
      <height>28</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>华文楷体</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>注册</string>
@@ -42,23 +48,35 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>210</y>
+     <y>230</y>
      <width>93</width>
      <height>28</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>华文楷体</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>取消</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>50</x>
      <y>50</y>
      <width>311</width>
-     <height>141</height>
+     <height>162</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>华文楷体</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <layout class="QFormLayout" name="formLayout">
     <property name="labelAlignment">
@@ -66,6 +84,12 @@
     </property>
     <item row="0" column="0">
      <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>用户名：</string>
       </property>
@@ -76,6 +100,12 @@
     </item>
     <item row="0" column="1">
      <widget class="QLineEdit" name="idLineEdit">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="placeholderText">
        <string>请输入您的用户名</string>
       </property>
@@ -83,6 +113,12 @@
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>姓名：</string>
       </property>
@@ -93,6 +129,12 @@
     </item>
     <item row="1" column="1">
      <widget class="QLineEdit" name="nameLineEdit">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="placeholderText">
        <string>请输入您的姓名</string>
       </property>
@@ -100,6 +142,12 @@
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="label_3">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>密码：</string>
       </property>
@@ -110,6 +158,12 @@
     </item>
     <item row="2" column="1">
      <widget class="QLineEdit" name="pwdLineEdit">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="echoMode">
        <enum>QLineEdit::Password</enum>
       </property>
@@ -120,6 +174,12 @@
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="label_4">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>再次输入密码：</string>
       </property>
@@ -130,6 +190,12 @@
     </item>
     <item row="3" column="1">
      <widget class="QLineEdit" name="repwdLineEdit">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="echoMode">
        <enum>QLineEdit::Password</enum>
       </property>
@@ -140,6 +206,12 @@
     </item>
     <item row="4" column="1">
      <widget class="QCheckBox" name="managerCheckBox">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>申请管理员权限</string>
       </property>

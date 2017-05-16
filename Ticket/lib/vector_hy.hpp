@@ -1,5 +1,5 @@
-#ifndef TICKET_VECTOR_HPP
-#define TICKET_VECTOR_HPP
+#ifndef TICKET_VECTOR_HY_HPP
+#define TICKET_VECTOR_HY_HPP
 
 #include "exceptions.hpp"
 #include "utility.hpp"
@@ -9,248 +9,248 @@
 #include<iostream>
 namespace tic {
 	/**
-	* a data container like std::vector
+    * a data container like std::vector_hy
 	* store data in a successive memory and support random access.
 	*/
 	template<typename T>
-	class vector {
+    class vector_hy {
 	
 	public:
 		/**
 		* TODO
-		* a type for actions of the elements of a vector, and you should write	��
+        * a type for actions of the elements of a vector_hy, and you should write	��
 		*   a class named const_iterator with same interfaces.
 		*/
 		/**
 		* you can see RandomAccessIterator at CppReference for help.
 		*/
-		class const_iterator;
-		class iterator {
-		private:
-			/**
-			* TODO add data members
-			*   just add whatever you want.
-			*/
-			
-			
-		public:
-			T * itr;
-			vector *vec;
-			/**
-			* return a new iterator which pointer n-next elements
-			*   even if there are not enough elements, just return the answer.
-			* as well as operator-
-			*/
-			iterator(vector * x = NULL, T * y = NULL) :vec(x), itr(y) {}
-			//iterator(const vector *  x, T * y = NULL) :vec(x), itr(y) {}
-			//iterator() :vec(NULL), itr(NULL) {}
-			iterator(const iterator & x) :vec(x.vec), itr(x.itr) {}
-			iterator(const const_iterator & x) :vec(x.vec), itr(x.itr) {}
-			iterator operator+(const int &n) const {
-				//TODO
-				iterator  tmp(*this);
-				tmp.itr = itr + n;
-				return tmp;
-			}
-			iterator operator-(const int &n) const {
-				//TODO
-				iterator  tmp(*this);
-				tmp.itr = itr - n;
-				return tmp;
-			}
-			// return the distance between two iterator,
-			// if these two iterators points to different vectors, throw invaild_iterator.
-			int operator-(const iterator &rhs) const {
-				//TODO
-				if (vec != rhs.vec) throw invalid_iterator();
-				int difference;
-				difference = (itr > rhs.itr) ? (itr - rhs.itr) : (rhs.itr - itr);
-				return difference;
-			}
+        class const_iterator;
+        class iterator {
+        private:
+            /**
+            * TODO add data members
+            *   just add whatever you want.
+            */
 
-			iterator& operator=(const iterator &x){
-				vec = x.vec, itr = x.itr;
-				return *this;
-			}
 
-			iterator operator+=(const int &n) {
-				//TODO
-				itr += n;
-				return *this;
-			}
-			iterator operator-=(const int &n) {
-				//TODO
-				itr -= n;
-				return *this;
-			}
-			/**
-			* TODO iter++
-			*/
-			iterator operator++(int) {
-				iterator tmp(*this);
-				itr++;
-				return tmp;
-			}
-			/**
-			* TODO ++iter
-			*/
-			iterator& operator++() {
-				itr++;
-				return *this;
-			}
-			/**
-			* TODO iter--
-			*/
-			iterator operator--(int) {
-				iterator tmp(*this);
-				itr--;
-				return tmp;
-			}
-			/**
-			* TODO --iter
-			*/
-			iterator& operator--() {
-				itr--;
-				return *this;
-			}
-			/**
-			* TODO *it
-			*/
-			T & operator*() const {
-				return *itr;
-			}
-			/**
-			* a operator to check whether two iterators are same (pointing to the same memory).
-			*/
-			bool operator==(const iterator &rhs) const {
-				return (itr == rhs.itr);
-			}
-			bool operator==(const const_iterator &rhs) const {
-				return (itr == rhs.itr);
-			}
-			/**
-			* some other operator for iterator.
-			*/
-			bool operator!=(const iterator &rhs) const {
-				return (itr != rhs.itr);
-			}
-			bool operator!=(const const_iterator &rhs) const {
-				return (itr != rhs.itr);
-			}
-		};
-		/**
-		* TODO
-		* has same function as iterator, just for a const object.
-		*/
-		class const_iterator {
-		private:
-			/**
-			* TODO add data members
-			*   just add whatever you want.
-			*/
-			
-			
-		public:
-			T * itr;
-			vector *vec;
-			/**
-			* return a new iterator which pointer n-next elements
-			*   even if there are not enough elements, just return the answer.
-			* as well as operator-
-			*/
-			const_iterator(vector * x = NULL, T * y = NULL) :vec(x), itr(y) {}
-			//const_iterator(const vector *  x,T * y=NULL) :vec(x), itr(y) {}
-			//const_iterator() :vec(NULL), itr(NULL) {}
-			const_iterator(const iterator & x) :vec(x.vec), itr(x.itr) {}
-			const_iterator(const const_iterator & x) :vec(x.vec), itr(x.itr) {}
-			const_iterator operator+(const int &n) const {
-				//TODO
-				iterator tmp(vec, itr + n);
-				return tmp;
-			}
-			const_iterator operator-(const int &n) const {
-				//TODO
-				iterator  tmp(vec, itr - n);
-				return tmp;
-			}
-			const_iterator& operator=(const const_iterator &x){
-				vec = x.vec, itr = x.itr;
-				return *this;
-			}
-			// return the distance between two iterator,
-			// if these two iterators points to different vectors, throw invaild_iterator.
-			int operator-(const iterator &rhs) const {
-				//TODO
-				if (vec != rhs.vec) throw invalid_iterator();
-				int difference;
-				difference = (itr > rhs.itr) ? (itr - rhs.itr) : (rhs.itr - itr);
-				return difference;
-			}
-			const_iterator operator+=(const int &n) {
-				//TODO
-				itr += n;
-				return *this;
-			}
-			const_iterator operator-=(const int &n) {
-				//TODO
-				itr -= n;
-				return *this;
-			}
-			/**
-			* TODO iter++
-			*/
-			const_iterator operator++(int) {
-				iterator tmp(*this);
-				itr++;
-				return tmp;
-			}
-			/**
-			* TODO ++iter
-			*/
-			const_iterator& operator++() {
-				itr++;
-				return *this;
-			}
-			/**
-			* TODO iter--
-			*/
-			const_iterator operator--(int) {
-				iterator tmp(*this);
-				itr--;
-				return tmp;
-			}
-			/**
-			* TODO --iter
-			*/
-			const_iterator& operator--() {
-				itr--;
-				return *this;
-			}
-			/**
-			* TODO *it
-			*/
+        public:
+            vector_hy *vec;
+            T * itr;
+            /**
+            * return a new iterator which pointer n-next elements
+            *   even if there are not enough elements, just return the answer.
+            * as well as operator-
+            */
+            iterator(vector_hy * x = NULL, T * y = NULL) :vec(x), itr(y) {}
+            //iterator(const vector_hy *  x, T * y = NULL) :vec(x), itr(y) {}
+            //iterator() :vec(NULL), itr(NULL) {}
+            iterator(const iterator & x) :vec(x.vec), itr(x.itr) {}
+            iterator(const const_iterator & x) :vec(x.vec), itr(x.itr) {}
+            iterator operator+(const int &n) const {
+                //TODO
+                iterator  tmp(*this);
+                tmp.itr = itr + n;
+                return tmp;
+            }
+            iterator operator-(const int &n) const {
+                //TODO
+                iterator  tmp(*this);
+                tmp.itr = itr - n;
+                return tmp;
+            }
+            // return the distance between two iterator,
+            // if these two iterators points to different vectors, throw invaild_iterator.
+            int operator-(const iterator &rhs) const {
+                //TODO
+                if (vec != rhs.vec) throw invalid_iterator();
+                int difference;
+                difference = (itr > rhs.itr) ? (itr - rhs.itr) : (rhs.itr - itr);
+                return difference;
+            }
+
+            iterator& operator=(const iterator &x){
+                vec = x.vec, itr = x.itr;
+                return *this;
+            }
+
+            iterator operator+=(const int &n) {
+                //TODO
+                itr += n;
+                return *this;
+            }
+            iterator operator-=(const int &n) {
+                //TODO
+                itr -= n;
+                return *this;
+            }
+            /**
+            * TODO iter++
+            */
+            iterator operator++(int) {
+                iterator tmp(*this);
+                itr++;
+                return tmp;
+            }
+            /**
+            * TODO ++iter
+            */
+            iterator& operator++() {
+                itr++;
+                return *this;
+            }
+            /**
+            * TODO iter--
+            */
+            iterator operator--(int) {
+                iterator tmp(*this);
+                itr--;
+                return tmp;
+            }
+            /**
+            * TODO --iter
+            */
+            iterator& operator--() {
+                itr--;
+                return *this;
+            }
+            /**
+            * TODO *it
+            */
+            T & operator*() const {
+                return *itr;
+            }
+            /**
+            * a operator to check whether two iterators are same (pointing to the same memory).
+            */
+            bool operator==(const iterator &rhs) const {
+                return (itr == rhs.itr);
+            }
+            bool operator==(const const_iterator &rhs) const {
+                return (itr == rhs.itr);
+            }
+            /**
+            * some other operator for iterator.
+            */
+            bool operator!=(const iterator &rhs) const {
+                return (itr != rhs.itr);
+            }
+            bool operator!=(const const_iterator &rhs) const {
+                return (itr != rhs.itr);
+            }
+        };
+        /**
+        * TODO
+        * has same function as iterator, just for a const object.
+        */
+        class const_iterator {
+        private:
+            /**
+            * TODO add data members
+            *   just add whatever you want.
+            */
+
+
+        public:
+            T * itr;
+            vector_hy *vec;
+            /**
+            * return a new iterator which pointer n-next elements
+            *   even if there are not enough elements, just return the answer.
+            * as well as operator-
+            */
+            const_iterator(vector_hy * x = NULL, T * y = NULL) :vec(x), itr(y) {}
+            //const_iterator(const vector_hy *  x,T * y=NULL) :vec(x), itr(y) {}
+            //const_iterator() :vec(NULL), itr(NULL) {}
+            const_iterator(const iterator & x) :vec(x.vec), itr(x.itr) {}
+            const_iterator(const const_iterator & x) :vec(x.vec), itr(x.itr) {}
+            const_iterator operator+(const int &n) const {
+                //TODO
+                iterator tmp(vec, itr + n);
+                return tmp;
+            }
+            const_iterator operator-(const int &n) const {
+                //TODO
+                iterator  tmp(vec, itr - n);
+                return tmp;
+            }
+            const_iterator& operator=(const const_iterator &x){
+                vec = x.vec, itr = x.itr;
+                return *this;
+            }
+            // return the distance between two iterator,
+            // if these two iterators points to different vectors, throw invaild_iterator.
+            int operator-(const iterator &rhs) const {
+                //TODO
+                if (vec != rhs.vec) throw invalid_iterator();
+                int difference;
+                difference = (itr > rhs.itr) ? (itr - rhs.itr) : (rhs.itr - itr);
+                return difference;
+            }
+            const_iterator operator+=(const int &n) {
+                //TODO
+                itr += n;
+                return *this;
+            }
+            const_iterator operator-=(const int &n) {
+                //TODO
+                itr -= n;
+                return *this;
+            }
+            /**
+            * TODO iter++
+            */
+            const_iterator operator++(int) {
+                iterator tmp(*this);
+                itr++;
+                return tmp;
+            }
+            /**
+            * TODO ++iter
+            */
+            const_iterator& operator++() {
+                itr++;
+                return *this;
+            }
+            /**
+            * TODO iter--
+            */
+            const_iterator operator--(int) {
+                iterator tmp(*this);
+                itr--;
+                return tmp;
+            }
+            /**
+            * TODO --iter
+            */
+            const_iterator& operator--() {
+                itr--;
+                return *this;
+            }
+            /**
+            * TODO *it
+            */
             const T & operator*() const {
-				return *itr;
-			}
-			/**
-			* a operator to check whether two iterators are same (pointing to the same memory).
-			*/
-			bool operator==(const iterator &rhs) const {
-				return (itr == rhs.itr);
-			}
-			bool operator==(const const_iterator &rhs) const {
-				return (itr == rhs.itr);
-			}
-			/**
-			* some other operator for iterator.
-			*/
-			bool operator!=(const iterator &rhs) const {
-				return (itr != rhs.itr);
-			}
-			bool operator!=(const const_iterator &rhs) const {
-				return (itr != rhs.itr);
-			}
-		};
+                return *itr;
+            }
+            /**
+            * a operator to check whether two iterators are same (pointing to the same memory).
+            */
+            bool operator==(const iterator &rhs) const {
+                return (itr == rhs.itr);
+            }
+            bool operator==(const const_iterator &rhs) const {
+                return (itr == rhs.itr);
+            }
+            /**
+            * some other operator for iterator.
+            */
+            bool operator!=(const iterator &rhs) const {
+                return (itr != rhs.itr);
+            }
+            bool operator!=(const const_iterator &rhs) const {
+                return (itr != rhs.itr);
+            }
+        };
 		private:
 			T * data;
 			int currentLength;
@@ -276,10 +276,10 @@ namespace tic {
 			}
 		/**
 		* TODO Constructs
-		* Atleast three: default constructor, copy constructor and a constructor for std::vector
+        * Atleast three: default constructor, copy constructor and a constructor for std::vector_hy
 		*/
 	public:
-		vector() {
+        vector_hy() {
 			maxSize = 10;
 			currentLength = 0;
 		    room = new char [maxSize*(sizeof(T))] ;  //HERE
@@ -289,7 +289,7 @@ namespace tic {
 			head = tmp1;
 			rear=tmp2;
 		}
-		vector(const vector &other) {
+        vector_hy(const vector_hy &other) {
 			maxSize = other.maxSize;
 			currentLength = other.currentLength;
 			 room = new char[maxSize*(sizeof(T))];  //HERE
@@ -305,7 +305,7 @@ namespace tic {
 		/**
 		* TODO Destructor
 		*/
-		~vector() { 
+        ~vector_hy() {
 			for (int i = 0;i < currentLength;++i) {
 				T * p = data + i;
 				p->~T();
@@ -315,7 +315,7 @@ namespace tic {
 		/**
 		* TODO Assignment operator
 		*/
-		vector &operator=(const vector<T> &other) {
+        vector_hy &operator=(const vector_hy<T> &other) {
 			maxSize = other.maxSize;
 			currentLength = other.currentLength;
 			for (int i = 0;i <currentLength;++i) data[i] = other.data[i];
@@ -344,7 +344,7 @@ namespace tic {
 		*   In STL this operator does not check the boundary but I want you to do.
 		*/
 		T & operator[](const size_t &pos) {
-			if (pos >= currentLength || pos < 0)  throw index_out_of_bound();  
+            if ((int)pos >= currentLength || pos < 0)  throw index_out_of_bound();
 			else {
 				 /*T tmp (data[pos]);
 				return tmp;*/
@@ -359,7 +359,7 @@ namespace tic {
 		* access the first element.
 		* throw container_is_empty if size == 0
 		*/
-		const T & front() const {
+        T & front() const {
 			if (currentLength == 0) throw container_is_empty();
 			else return data[0];
 		}
@@ -367,7 +367,7 @@ namespace tic {
 		* access the last element.
 		* throw container_is_empty if size == 0
 		*/
-		const T & back() const {
+        T & back() const {
 			if (currentLength == 0) throw container_is_empty();
 			else return data[currentLength - 1];
 		}

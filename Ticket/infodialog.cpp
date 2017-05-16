@@ -41,7 +41,7 @@ void InfoDialog::on_pushButton_clicked()
         return;
     }
     if( newpwd.length() < 6 ) {
-        QMessageBox::warning( this, "出错了", "密码长度过，短密码长度至少为6个字符，请重新输入" );
+        QMessageBox::warning( this, "出错了", "密码长度过短，密码长度至少为6个字符，请重新输入" );
         ui->pwdLineEdit->clear();
         ui->repwdLineEdit->clear();
         ui->pwdLineEdit->setFocus();

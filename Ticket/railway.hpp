@@ -18,7 +18,7 @@ namespace tic {
 using std::stringstream;
 
 const int DefaultPassengerNumber = 30;
-const QString DefaultDateFormat = "yyyy-MM-dd ddd";
+
 
 class Railway {
 	public:	//	TODO: change to private
@@ -136,12 +136,24 @@ class Railway {
 		bool deleteTrain( string trainid ) {
 			if( trains.count(trainid) == 0 ) return false;
             Train &train = trains[trainid];
+            vector<QString> &stations = train.stations;
+            for( int i = 0; i < (int)stations.size(); i++ )
+                for( int j = i + 1; j < (int)stations.size(); j++ ) {
+                    vector<string> &vc = table[pair<string,string>(stations[i],stations[j])];
+                    vector<string> nvc;
+                    for( int k = 0; k < (int)vc.size(); k++ ) {
+                        if( vc[k] != trainid ) {
+                            nvc.push_back( vc[k] );
+                        }
+                    }
+                    table[pair<string,string>(stations[i],stations[j])] = nvc;
+                }
+            trains.erase(trains.find(trainid));
             logs.insert( Log(QDate::currentDate(),QTime::currentTime(),curUserid,
                              QString( "删除列车 %1，共 %2 站，座位类型有 %3 种")
                              .arg(train.id).arg(train.stations.size()).arg(train.seats[Date(1,1,1)].second.size())
                              )
             );
-            trains.erase(trains.find(trainid));
             return true;
 		}
         bool isSelling( string trainid, Date date ) {
@@ -242,6 +254,9 @@ class Railway {
 					}
 			}
 		}
+        //	D5911/D5914
+        //	站名 日期 到达时间 停车时间 里程 二等座 一等座 无座
+        //	利川 2017-03-28 起点站 14:38 0km ¥0 ¥0 ¥0
         void readTrainFromFile( QString filename ) {
 			std::ifstream fin;
             fin.open( filename.toStdString().c_str(), std::ifstream::in );
@@ -260,7 +275,7 @@ class Railway {
 					throw unexcepted_file_format();
                 map<string,Seat> & def_seats = train.seats[Date(1,1,1)].second;
                 train.seats[Date(1,1,1)].first = true;
-				for( size_t i = 5; i < vc.size(); i++ ) {
+                for( size_t i = 5; i < vc.size(); i++ ) {
 					Seat seat;
 					seat.type = vc[i];
                     def_seats[vc[i]] = seat;
@@ -272,20 +287,26 @@ class Railway {
 						if( vc.size() != 5 + def_seats.size() ) 
 							throw unexcepted_file_format();
 						train.stations.push_back( vc[0] );
-                        train.dists.push_back( vc[4].toInt() );
+                        train.dists.push_back( vc[4].left(vc[4].size()-2).toInt() );
 						pair<Time,Time> tpr = transTime( vc[2], vc[3] );
-						train.arrive.push_back( tpr.first );
-						train.leave.push_back( tpr.second );
-						size_t sz = train.arrive.size();
-						if( sz >= 2 && train.arrive[sz-1] < train.arrive[sz-2] )
-                            train.arrive[sz-1] = train.arrive[sz-2].addSecs( 24 * 60 * 60 );
-						if( sz >= 2 && train.leave[sz-1] < train.leave[sz-2] )
-                            train.leave[sz-1] = train.leave[sz-2].addSecs( 24 * 60 * 60 );
+                        QDateTime qdt =  QDateTime( QDate::fromString( vc[1], "yyyy-MM-dd"), tpr.first );
+                        train.arrive.push_back( QDateTime( QDate::fromString( vc[1], "yyyy-MM-dd"), tpr.first ) );
+                        train.leave.push_back( QDateTime( QDate::fromString( vc[1], "yyyy-MM-dd"), tpr.second ) );
+//						size_t sz = train.arrive.size();
 						for( size_t i = 5; i < vc.size(); i++ ) {
                             def_seats[header[i]].prices.push_back( vc[i].mid(1).toDouble() );
                             def_seats[header[i]].remains.push_back( DefaultPassengerNumber );
 						}
 					} else {
+                        QDate startDate = train.arrive.front().date();
+                        int tot = (int)train.stations.size();
+                        for( int i = 0; i < tot; i++ ) {
+                            for( int t = 0; t < 2; t++ ) {
+                                QDateTime & dt = (t == 0 ? train.arrive[i] : train.leave[i]);
+                                int day = startDate.daysTo( dt.date() ) + 1;
+                                dt.setDate( QDate(1,1,day) );
+                            }
+                        }
 						trains[train.id] = train;
 						break;
 					}
@@ -301,7 +322,9 @@ class Railway {
                 throw fail_to_open_file();
             QTextStream in(&file);
             in.setCodec( "UTF-8" );
+            int tot = 0;
             while( !in.atEnd() ) {
+                qDebug() << ++tot;
                 QString line = in.readLine();
                 QStringList list = line.split( " ", QString::SkipEmptyParts );
                 if( list.size() != 14 ) {
@@ -313,10 +336,13 @@ class Railway {
 
                 if( users.count(list[1]) == 0 ) {
                     User user;
+                    addUser( list[1], list[0], "000000", false );
+                    /*
                     user.id = list[1];
                     user.name = list[0];
                     user.password = "000000";
                     users[user.id] = user;
+                    */
                 }
                 string userid = list[1];
                 string trainid = list[7];
@@ -340,20 +366,6 @@ class Railway {
                 }
             }
 		}
-		void print() {
-			printf( "number of trains: %d\n", (int)trains.size() );
-            set<string> st;
-            for( map<string,Train>::iterator it = trains.begin(); it != trains.end(); ++it ) {
-//				printf( "id:%s  stations: %d  Running: %3s\n", 
-//						it->first.c_str(),
-//						(int)it->second.stations.size(),
-//						it->second.hasStop ? "NO" : "YES" );
-                vector<string> &vc = it->second.stations;
-				for( int i = 0; i < (int)vc.size(); i++ )
-					st.insert(vc[i]);
-			}
-			printf( "total stations: %d\n", (int)st.size() );
-		}
 		void read( istream & in ) {
 			tic::read( in, users );
 			tic::read( in, table );
@@ -373,8 +385,11 @@ class Railway {
 using tic::Railway;
 using tic::Ticket;
 using tic::Train;
+
 extern Railway railway;
-extern string curUserid;
+extern QString DefaultDateFormat;
+extern QString DefaultTimeFormat;
+extern QString DefaultDateTimeFormat;
 
 #endif
 

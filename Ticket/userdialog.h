@@ -22,6 +22,8 @@ private slots:
 
     void on_modifyInfoButton_clicked();
 
+    void update_time();
+
 private:
     Ui::UserDialog *ui;
 };

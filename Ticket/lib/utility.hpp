@@ -95,6 +95,8 @@ namespace tic {
     void write( ostream &out, ushort &v );
     void read( istream &in, void * &v );
     void write( ostream &out, void * &v );
+    void read( istream &in, QDateTime &dt );
+    void write( ostream &out, QDateTime &dt );
     //	utilities for general use
     template<class T1, class T2>
         class pair {
@@ -131,6 +133,8 @@ namespace tic {
                     return second < rhs.second;
                 }
         };
+
+       QDateTime transDateTime( QDate curdate, QDateTime deftime );
 }
 
 #endif

@@ -12,13 +12,13 @@ LoginDialog::LoginDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 //    tic::load( "railway.data", railway );
-    tic::load( "D:/TicketData/SmallSet/railway.data", railway );
+    tic::load( "D:/TicketData/BigSet/railway.data", railway );
 }
 
 LoginDialog::~LoginDialog()
 {
 //    tic::save( "railway.data", railway );
-    tic::save( "D:/TicketData/SmallSet/railway.data", railway );
+    tic::save( "D:/TicketData/BigSet/railway.data", railway );
     delete ui;
 }
 
@@ -37,6 +37,7 @@ void LoginDialog::on_loginPushButton_clicked()
             this->hide();
             if( managerDialog.exec() == QDialog::Accepted ) {
                 this->show();
+                railway.curUserid = "";
             } else {
                 accept();
             }
@@ -45,6 +46,7 @@ void LoginDialog::on_loginPushButton_clicked()
             this->hide();
             if( userDialog.exec() == QDialog::Accepted ) {
                 this->show();
+                railway.curUserid = "";
             } else {
                 accept();
             }

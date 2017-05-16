@@ -17,11 +17,21 @@ ManagerDialog::ManagerDialog(QWidget *parent) :
     ui(new Ui::ManagerDialog)
 {
     ui->setupUi(this);
+    ui->nameLabel->setText( QString("管理员 %1 您好！").arg(railway.users[railway.curUserid].name) );
+    QTimer *timer = new QTimer(this);
+    connect( timer, SIGNAL(timeout()), this, SLOT(update_time()) );
+    update_time();
+    timer->start( 1000 );
 }
 
 ManagerDialog::~ManagerDialog()
 {
     delete ui;
+}
+
+
+void ManagerDialog::update_time() {
+    ui->timeLabel->setText( QDateTime::currentDateTime().toString("当前时间：yyyy-MM-dd hh:mm:ss"));
 }
 
 void ManagerDialog::on_addPushButton_clicked()

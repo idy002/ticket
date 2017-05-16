@@ -7,6 +7,7 @@
 #include "lib/lib.hpp"
 
 #include "ticket.hpp"
+#include <QDateTime>
 
 namespace tic {
 struct Seat {
@@ -29,7 +30,7 @@ struct Train {
 	string id;
 	vector<string> stations;
 	vector<int> dists;
-	vector<Time> arrive, leave;
+    vector<QDateTime> arrive, leave;
     map<Date,pair<bool,map<string,Seat>>> seats;
 
     inline bool isZero( double x ) {
@@ -77,6 +78,7 @@ struct Train {
         }
     }
 
+
     void queryTicket( Date date, string from, string to, vector<pair<Ticket,int>> & result ) {
         if( !isSelling(date) ) return;
         map<string,Seat> &vseat = seats[date].second;
@@ -99,8 +101,8 @@ struct Train {
 			ticket.from = from;
 			ticket.to = to;
 			ticket.type = seat.type;
-			ticket.leave = leave[tfrom];
-			ticket.arrive = arrive[tto];
+            ticket.leave = tic::transDateTime( date, leave[tfrom] );
+            ticket.arrive = tic::transDateTime( date, arrive[tto] );
 			ticket.dist = dists[tto] - dists[tfrom];
 			ticket.price = seat.prices[tto] - seat.prices[tfrom];
 			result.push_back( pair<Ticket,int>( ticket, available ) );
@@ -118,6 +120,7 @@ struct Train {
 		}
 
         Seat &seat = seats[date].second[type];
+        if( tfrom == tto ) return false;
         if( tfrom && isZero(seat.prices[tfrom]) ) return false;
         if( tto && isZero(seat.prices[tto] )) return false;
 
@@ -133,8 +136,8 @@ struct Train {
         ticket.from = from;
         ticket.to = to;
         ticket.type = seat.type;
-        ticket.leave = leave[tfrom];
-        ticket.arrive = arrive[tto];
+        ticket.leave = tic::transDateTime( date, leave[tfrom] );
+        ticket.arrive = tic::transDateTime( date, arrive[tto] );
         ticket.dist = dists[tto] - dists[tfrom];
         ticket.price = seat.prices[tto] - seat.prices[tfrom];
         result.second = available;

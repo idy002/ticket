@@ -43,12 +43,12 @@ void MyTicketDialog::refresh() {
         for( int t = 0; t < (int)vec.size(); t++ ) {
             QString row[11];
             tic::Ticket & tk = vec[t].first;
-            row[0] = tk.date.toString(tic::DefaultDateFormat);
+            row[0] = tk.date.toString(DefaultDateFormat);
             row[1] = tk.trainid;
             row[2] = tk.from;
             row[3] = tk.to;
-            row[4] = tk.leave.toString(tic::DefaultDateFormat);
-            row[5] = tk.arrive.toString(tic::DefaultDateFormat);
+            row[4] = tk.leave.toString(DefaultDateTimeFormat);
+            row[5] = tk.arrive.toString(DefaultDateTimeFormat);
             row[6] = QString::number(tk.dist);
             row[7] = tk.type;
             row[8] = QString::number(tk.price,'f',1);
@@ -62,6 +62,7 @@ void MyTicketDialog::refresh() {
         }
     }
     ui->tableWidget->setCurrentCell( oldx, oldy );
+    on_tableWidget_itemSelectionChanged();
 }
 
 void MyTicketDialog::on_refundPushButton_clicked()
@@ -75,7 +76,7 @@ void MyTicketDialog::on_refundPushButton_clicked()
 void MyTicketDialog::on_tableWidget_itemSelectionChanged()
 {
     int row = ui->tableWidget->currentRow();
-    if( row < (int)bought.size() ) {
+    if( 0 <= row && row < (int)bought.size() ) {
         ui->refundPushButton->setEnabled( true );
     } else {
         ui->refundPushButton->setEnabled( false );

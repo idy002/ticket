@@ -1,6 +1,9 @@
 <RCC>
     <qresource prefix="/myimages">
         <file>images/timg.png</file>
-        <file>images/timg - 副本.png</file>
+        <file>images/back1.png</file>
+        <file>images/begin.png</file>
+        <file>images/loginl.png</file>
+        <file>images/loginr.png</file>
     </qresource>
 </RCC>

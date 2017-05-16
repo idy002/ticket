@@ -29,10 +29,16 @@
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>130</y>
+     <y>140</y>
      <width>93</width>
      <height>28</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>华文楷体</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>完成</string>
@@ -42,54 +48,105 @@
    <property name="geometry">
     <rect>
      <x>230</x>
-     <y>130</y>
+     <y>140</y>
      <width>93</width>
      <height>28</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>华文楷体</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>取消</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>40</x>
      <y>30</y>
-     <width>300</width>
-     <height>79</height>
+     <width>341</width>
+     <height>97</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>华文楷体</family>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <layout class="QFormLayout" name="formLayout">
     <item row="0" column="0">
      <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>列车编号：</string>
       </property>
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QLineEdit" name="idLineEdit"/>
+     <widget class="QLineEdit" name="idLineEdit">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </widget>
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>列车途径站台数：</string>
       </property>
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QLineEdit" name="stationCntLineEdit"/>
+     <widget class="QLineEdit" name="stationCntLineEdit">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </widget>
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="label_3">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>座位类型数：</string>
       </property>
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QLineEdit" name="typeCntLineEdit"/>
+     <widget class="QLineEdit" name="typeCntLineEdit">
+      <property name="font">
+       <font>
+        <family>华文楷体</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

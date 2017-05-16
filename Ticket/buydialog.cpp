@@ -21,7 +21,7 @@ BuyDialog::BuyDialog(QWidget *parent, QDate date, QString from, QString to) :
     this->from = from;
     this->to = to;
 
-    qDebug() << QString("buy %1 to %2 on %3").arg(from).arg(to).arg(date.toString(tic::DefaultDateFormat));
+    qDebug() << QString("buy %1 to %2 on %3").arg(from).arg(to).arg(date.toString(DefaultDateFormat));
 
     refresh();
     on_tableWidget_itemSelectionChanged();
@@ -57,12 +57,12 @@ void BuyDialog::refresh() {
     for( int t = 0; t < (int)vec.size(); t++ ) {
         QString row[10];
         tic::Ticket & tk = vec[t].first;
-        row[0] = tk.date.toString(tic::DefaultDateFormat);
+        row[0] = tk.date.toString(DefaultDateFormat);
         row[1] = tk.trainid;
         row[2] = tk.from;
         row[3] = tk.to;
-        row[4] = tk.leave.toString(tic::DefaultDateFormat);
-        row[5] = tk.arrive.toString(tic::DefaultDateFormat);
+        row[4] = tk.leave.toString(DefaultDateTimeFormat);
+        row[5] = tk.arrive.toString(DefaultDateTimeFormat);
         row[6] = QString::number(tk.dist);
         row[7] = tk.type;
         row[8] = QString::number(tk.price,'f',1);

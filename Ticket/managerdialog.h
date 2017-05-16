@@ -2,6 +2,7 @@
 #define MANAGERDIALOG_H
 
 #include <QDialog>
+#include <QTimer>
 
 namespace Ui {
 class ManagerDialog;
@@ -32,8 +33,12 @@ private slots:
 
     void on_logPushButton_clicked();
 
+    void update_time();
+
 private:
     Ui::ManagerDialog *ui;
+    QTimer *timer;
+
 };
 
 #endif // MANAGERDIALOG_H

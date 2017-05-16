@@ -18,6 +18,7 @@ namespace tic {
     void write( ostream &out, ushort &v ) { write_default(out,v); }
     void read( istream &in, size_t & val ) { read_default(in,val); }
     void write( ostream &out, size_t & val ) { write_default(out,val); }
+
 //    void read( istream &in, void * &v ) { read_default(in,v); }
 //   void write( ostream &out, void * &v ) { write_default(out,v); }
     void read( istream & in, string & str ) {
@@ -72,5 +73,26 @@ namespace tic {
         write( out, minute );
         write( out, second );
         write( out, msec );
+    }
+    void read( istream &in, QDateTime &dt ) {
+        QDate date;
+        QTime time;
+        read( in, date );
+        read( in, time );
+        dt = QDateTime( date, time );
+    }
+    void write( ostream &out, QDateTime &dt ) {
+        QDate date = dt.date();
+        QTime time = dt.time();
+        write( out, date );
+        write( out, time );
+    }
+    QDateTime transDateTime( QDate curdate, QDateTime deftime ) {
+        QDateTime dt = QDateTime();
+        int delta = deftime.date().dayOfYear() - 1;
+        dt.setDate( curdate );
+        dt = dt.addDays( deftime.date().dayOfYear() - 1 );
+        dt.setTime( deftime.time() );
+        return dt;
     }
 }
